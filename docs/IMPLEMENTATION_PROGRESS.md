@@ -29,8 +29,8 @@
 | 10 | Base database models | `models` | `app/models/base.py` UUID PK, timestamps, audit mixin | `pytest test_base_model.py` 1 passed | `0436257` | ✅ Complete |
 | 11 | API error handling | `core` | `app/core/exceptions.py`, RFC 7807 error handlers | `pytest test_error_handling.py` 5 passed | `3372745` | ✅ Complete |
 | 12 | Logging system | `core` | `app/core/logging.py`, `app/core/middleware.py` | `pytest test_logging_middleware.py` 2 passed | `f1a2d1c` | ✅ Complete |
-| 13 | Configuration management | `config` | `app/core/config.py` Pydantic BaseSettings | `pytest test_config.py` 2 passed | `pending` | 🔄 In Progress |
-| 14 | Health-check endpoints | `health` | `/health`, `/health/ready`, `/health/live` endpoints | Endpoint curl/pytest | — | ⏳ Planned |
+| 13 | Configuration management | `config` | `app/core/config.py` Pydantic BaseSettings | `pytest test_config.py` 2 passed | `cfbdd38` | ✅ Complete |
+| 14 | Health-check endpoints | `health` | `/health`, `/health/ready`, `/health/live` endpoints | `pytest test_health.py` 3 passed | `pending` | 🔄 In Progress |
 | 15 | CI/basic quality checks | `ci` | `.github/workflows/ci.yml`, pytest runner script | CI syntax & runner execution | — | ⏳ Planned |
 
 ---
