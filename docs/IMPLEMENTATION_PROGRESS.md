@@ -25,8 +25,8 @@
 | 6 | Frontend foundation | `frontend` | `frontend/package.json`, Next.js 14 App Router, Tailwind | `npm run build` static compilation | `4f06886` | ✅ Complete |
 | 7 | Backend FastAPI foundation | `backend` | `backend/app/main.py`, requirements, pyproject.toml | FastAPI app startup test | `6af5f9b` | ✅ Complete |
 | 8 | PostgreSQL connection | `database` | `app/core/database.py` async engine & session manager | `pytest test_database.py` 1 passed | `2e8d296` | ✅ Complete |
-| 9 | Database migration system | `database` | `alembic.ini`, `alembic/env.py`, initial migration setup | `alembic current` executed cleanly | `pending` | 🔄 In Progress |
-| 10 | Base database models | `models` | `app/models/base.py` UUID PK, timestamps, audit mixin | Model import & inspection | — | ⏳ Planned |
+| 9 | Database migration system | `database` | `alembic.ini`, `alembic/env.py`, initial migration setup | `alembic current` executed cleanly | `e9649c7` | ✅ Complete |
+| 10 | Base database models | `models` | `app/models/base.py` UUID PK, timestamps, audit mixin | `pytest test_base_model.py` 1 passed | `pending` | 🔄 In Progress |
 | 11 | API error handling | `core` | `app/core/exceptions.py`, RFC 7807 error handlers | Exception handler unit test | — | ⏳ Planned |
 | 12 | Logging system | `core` | `app/core/logging.py`, request tracing middleware | Request ID header test | — | ⏳ Planned |
 | 13 | Configuration management | `config` | `app/core/config.py` Pydantic BaseSettings | Settings load & override test | — | ⏳ Planned |
