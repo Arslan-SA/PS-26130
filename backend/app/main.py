@@ -11,6 +11,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.core.exceptions import register_exception_handlers
+
 logger = logging.getLogger("udyamsetu.main")
 
 
@@ -33,6 +35,9 @@ def create_application() -> FastAPI:
         openapi_url="/openapi.json",
         lifespan=lifespan,
     )
+
+    # Register central error handling
+    register_exception_handlers(app)
 
     # CORS configuration
     app.add_middleware(
