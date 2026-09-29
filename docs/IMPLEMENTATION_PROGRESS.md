@@ -18,8 +18,8 @@
 | # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
 |---|---|---|---|---|---|---|
 | 1 | Repository audit and architecture setup | `architecture` | `docs/architecture/ARCHITECTURE.md`, `docs/IMPLEMENTATION_PROGRESS.md` | Repo inspected, directory verified | `ac3fc98` | ✅ Complete |
-| 2 | Project documentation | `docs` | `docs/SPECIFICATIONS.md`, `docs/DOMAIN_GLOSSARY.md`, `LICENSE` | Doc syntax & links verified | `pending` | 🔄 In Progress |
-| 3 | Monorepo structure | `setup` | Root workspaces, directory structure | File tree validation | — | ⏳ Planned |
+| 2 | Project documentation | `docs` | `docs/SPECIFICATIONS.md`, `docs/DOMAIN_GLOSSARY.md`, `LICENSE` | Doc syntax & links verified | `2a37b76` | ✅ Complete |
+| 3 | Monorepo structure | `setup` | `package.json`, `scripts/`, backend domain packages | File tree validation | `pending` | 🔄 In Progress |
 | 4 | Environment configuration | `config` | `.env.example`, `.gitignore`, validation scripts | Config parsing check | — | ⏳ Planned |
 | 5 | Docker foundation | `docker` | `docker-compose.yml`, Dockerfiles for frontend & backend | Dockerfile lint/syntax check | — | ⏳ Planned |
 | 6 | Frontend foundation | `frontend` | `frontend/package.json`, Next.js app scaffolding, tailwind | `npm run build` / lint check | — | ⏳ Planned |
