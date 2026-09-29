@@ -15,21 +15,22 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import declarative_base
 
+from app.core.config import settings
+
 logger = logging.getLogger("udyamsetu.database")
 
-# Default database URL: fallback to local SQLite for zero-dependency local runs
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./udyamsetu.db")
+DATABASE_URL = settings.DATABASE_URL
 
 # Setup engine arguments based on database driver
 engine_kwargs = {
-    "echo": os.getenv("DEBUG", "false").lower() == "true",
+    "echo": settings.DEBUG,
     "future": True,
 }
 
 if DATABASE_URL.startswith("postgresql"):
     engine_kwargs.update({
-        "pool_size": int(os.getenv("DB_POOL_SIZE", "10")),
-        "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", "20")),
+        "pool_size": settings.DB_POOL_SIZE,
+        "max_overflow": settings.DB_MAX_OVERFLOW,
         "pool_pre_ping": True,
         "pool_recycle": 3600,
     })

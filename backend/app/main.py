@@ -11,6 +11,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import setup_logging
 from app.core.middleware import RequestContextMiddleware
@@ -22,16 +23,16 @@ logger = logging.getLogger("udyamsetu.main")
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan manager for async startup and shutdown events."""
     setup_logging()
-    logger.info("Initializing UdyamSetu AI API Core...")
+    logger.info(f"Initializing {settings.PROJECT_NAME} [{settings.ENVIRONMENT}]...")
     yield
-    logger.info("Shutting down UdyamSetu AI API Core...")
+    logger.info(f"Shutting down {settings.PROJECT_NAME}...")
 
 
 def create_application() -> FastAPI:
     """Factory function to build and configure the FastAPI app."""
     app = FastAPI(
-        title="UdyamSetu AI",
-        description="Unified Industrial Approval, Compliance & Subsidy Management Platform (SIH26130)",
+        title=settings.PROJECT_NAME,
+        description=f"{settings.TAGLINE} ({settings.PROBLEM_STATEMENT})",
         version="1.0.0",
         docs_url="/docs",
         redoc_url="/redoc",
@@ -48,7 +49,7 @@ def create_application() -> FastAPI:
     # CORS configuration
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],
+        allow_origins=settings.BACKEND_CORS_ORIGINS,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -58,13 +59,14 @@ def create_application() -> FastAPI:
     async def root() -> JSONResponse:
         return JSONResponse(
             content={
-                "name": "UdyamSetu AI",
-                "tagline": "Intelligent Industrial Approval & Compliance Platform",
-                "problem_statement": "SIH26130",
+                "name": settings.PROJECT_NAME,
+                "tagline": settings.TAGLINE,
+                "problem_statement": settings.PROBLEM_STATEMENT,
                 "version": "1.0.0",
                 "status": "operational",
+                "environment": settings.ENVIRONMENT,
                 "docs": "/docs",
-                "api_v1": "/api/v1",
+                "api_v1": settings.API_V1_STR,
             }
         )
 
