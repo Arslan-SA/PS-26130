@@ -12,6 +12,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.core.exceptions import register_exception_handlers
+from app.core.logging import setup_logging
+from app.core.middleware import RequestContextMiddleware
 
 logger = logging.getLogger("udyamsetu.main")
 
@@ -19,6 +21,7 @@ logger = logging.getLogger("udyamsetu.main")
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan manager for async startup and shutdown events."""
+    setup_logging()
     logger.info("Initializing UdyamSetu AI API Core...")
     yield
     logger.info("Shutting down UdyamSetu AI API Core...")
@@ -35,6 +38,9 @@ def create_application() -> FastAPI:
         openapi_url="/openapi.json",
         lifespan=lifespan,
     )
+
+    # Attach request tracing & access logging middleware
+    app.add_middleware(RequestContextMiddleware)
 
     # Register central error handling
     register_exception_handlers(app)
