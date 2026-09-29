@@ -21,8 +21,8 @@
 | 2 | Project documentation | `docs` | `docs/SPECIFICATIONS.md`, `docs/DOMAIN_GLOSSARY.md`, `LICENSE` | Doc syntax & links verified | `2a37b76` | ✅ Complete |
 | 3 | Monorepo structure | `setup` | `package.json`, `scripts/`, backend domain packages | File tree validation | `33c041c` | ✅ Complete |
 | 4 | Environment configuration | `config` | `.env.example`, `.gitignore`, `scripts/verify_env.py` | Config parsing check | `b4fefa2` | ✅ Complete |
-| 5 | Docker foundation | `docker` | `docker-compose.yml`, `docker/Dockerfile.*`, `.dockerignore` | Docker compose config check | `pending` | 🔄 In Progress |
-| 6 | Frontend foundation | `frontend` | `frontend/package.json`, Next.js app scaffolding, tailwind | `npm run build` / lint check | — | ⏳ Planned |
+| 5 | Docker foundation | `docker` | `docker-compose.yml`, `docker/Dockerfile.*`, `.dockerignore` | Docker compose config check | `0094aef` | ✅ Complete |
+| 6 | Frontend foundation | `frontend` | `frontend/package.json`, Next.js 14 App Router, Tailwind | `npm run build` static compilation | `pending` | 🔄 In Progress |
 | 7 | Backend FastAPI foundation | `backend` | `backend/app/main.py`, requirements, pyproject.toml | FastAPI app startup test | — | ⏳ Planned |
 | 8 | PostgreSQL connection | `database` | `app/core/database.py` async engine & session manager | DB connectivity test | — | ⏳ Planned |
 | 9 | Database migration system | `database` | `alembic.ini`, `alembic/env.py`, initial migration setup | Alembic env check | — | ⏳ Planned |
