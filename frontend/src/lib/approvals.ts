@@ -143,4 +143,44 @@ export async function getRequirementById(requirementId: string): Promise<Approva
   return apiFetch<ApprovalRequirement>(`/approvals/requirements/${requirementId}`);
 }
 
+export interface GraphNode {
+  id: string;
+  requirement_id: string;
+  title: string;
+  department_code: string;
+  issuing_authority: string;
+  stage: RequirementStage;
+  status: RequirementStatus;
+  is_unlocked: boolean;
+  missing_prerequisites: string[];
+  estimated_fee: number;
+  sla_days: number;
+  priority: number;
+}
+
+export interface GraphEdge {
+  id: string;
+  source: string;
+  target: string;
+  dependency_type: string;
+  description?: string | null;
+}
+
+export interface DependencyGraphResponse {
+  business_id: string;
+  nodes: GraphNode[];
+  edges: GraphEdge[];
+  topological_order: string[];
+  critical_path: string[];
+  critical_path_days: number;
+}
+
+/**
+ * Retrieve the statutory clearance dependency DAG for an enterprise.
+ */
+export async function getDependencyGraph(businessId: string): Promise<DependencyGraphResponse> {
+  return apiFetch<DependencyGraphResponse>(`/approvals/graph/${businessId}`);
+}
+
+
 

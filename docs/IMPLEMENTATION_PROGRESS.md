@@ -87,7 +87,9 @@
 | 49 | Approval detail page | `frontend` | `frontend/src/app/approvals/[id]/page.tsx`, `frontend/src/lib/approvals.ts`, `app/api/approvals.py` | Next.js dynamic route compilation + `pytest test_approval_api.py` (all 109 passed) | `4e6ef42` | ✅ Complete |
 | 50 | Approval dependency model | `approvals` | `app/models/approval_dependency.py`, `models/__init__.py`, `test_approval_dependency_model.py` | `pytest test_approval_dependency_model.py` 3 passed (all 112 passed) | `80f1d86` | ✅ Complete |
 | 51 | Dependency engine | `approvals` | `app/services/dependency_engine.py`, `test_dependency_engine.py` | `pytest test_dependency_engine.py` 4 passed (all 116 passed) | `4933c4a` | ✅ Complete |
-| 52 | Dependency graph backend | `approvals` | `app/schemas/approval.py`, `app/api/approvals.py`, `test_dependency_graph_api.py` | `pytest test_dependency_graph_api.py` 1 passed (all 117 passed) | `ef173d5` | ✅ Complete |
+| 52 | Dependency graph backend | `approvals` | `app/schemas/approval.py`, `app/api/approvals.py`, `test_dependency_graph_api.py` | `pytest test_dependency_graph_api.py` 1 passed (all 117 passed) | `434bb17` | ✅ Complete |
+| 53 | Dependency graph frontend | `frontend` | `frontend/src/app/approvals/graph/page.tsx`, `components/approvals/DependencyGraphView.tsx`, `lib/approvals.ts` | Next.js 14 static build (11/11 routes compiled) | `6f54c79` | ✅ Complete |
+
 
 
 
