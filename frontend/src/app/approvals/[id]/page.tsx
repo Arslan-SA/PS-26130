@@ -7,13 +7,16 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import {
   ApprovalChecklist,
   ApprovalRequirement,
+  ApprovalStatusHistory,
   RequirementStage,
   RequirementStatus,
   getRequirementById,
   getRequirementChecklist,
+  getRequirementStatusHistory,
   updateRequirementStatus,
 } from "@/lib/approvals";
 import ApprovalChecklistView from "@/components/approvals/ApprovalChecklistView";
+import { ApprovalStatusAuditTimeline } from "@/components/approvals/ApprovalStatusAuditTimeline";
 
 export default function ApprovalDetailPage() {
   const params = useParams();
@@ -21,7 +24,8 @@ export default function ApprovalDetailPage() {
 
   const [requirement, setRequirement] = useState<ApprovalRequirement | null>(null);
   const [checklist, setChecklist] = useState<ApprovalChecklist | null>(null);
-  const [activeTab, setActiveTab] = useState<"CHECKLIST" | "LEGAL" | "WORKFLOW" | "CONTACT">("CHECKLIST");
+  const [history, setHistory] = useState<ApprovalStatusHistory[]>([]);
+  const [activeTab, setActiveTab] = useState<"CHECKLIST" | "LEGAL" | "WORKFLOW" | "CONTACT" | "AUDIT_TRAIL">("CHECKLIST");
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [updating, setUpdating] = useState<boolean>(false);
@@ -39,6 +43,13 @@ export default function ApprovalDetailPage() {
           setChecklist(chk);
         } catch (e) {
           console.warn("No specific checklist found for this clearance", e);
+        }
+
+        try {
+          const hist = await getRequirementStatusHistory(requirementId);
+          setHistory(hist);
+        } catch (e) {
+          console.warn("Failed to load status history", e);
         }
       } catch (err: any) {
         console.error("Failed to load approval detail:", err);
@@ -210,9 +221,10 @@ export default function ApprovalDetailPage() {
               </div>
 
               {/* Navigation Tabs */}
-              <div className="flex border-b border-slate-800 gap-4">
+              <div className="flex border-b border-slate-800 gap-4 overflow-x-auto">
                 {[
                   { id: "CHECKLIST", label: "Dossier Checklist & Documents" },
+                  { id: "AUDIT_TRAIL", label: "📜 Lifecycle Audit Trail" },
                   { id: "LEGAL", label: "Statutory Scope & Legal Authority" },
                   { id: "WORKFLOW", label: "Single-Window Workflow Steps" },
                   { id: "CONTACT", label: "Department & Grievance Desk" },
@@ -337,6 +349,18 @@ export default function ApprovalDetailPage() {
                     </p>
                   </div>
                 </div>
+              )}
+
+              {/* Tab Content 5: Lifecycle Audit Trail */}
+              {activeTab === "AUDIT_TRAIL" && (
+                <ApprovalStatusAuditTimeline
+                  requirement={requirement}
+                  history={history}
+                  onHistoryUpdated={(newHistory, updatedReq) => {
+                    setHistory(newHistory);
+                    setRequirement(updatedReq);
+                  }}
+                />
               )}
             </>
           )}

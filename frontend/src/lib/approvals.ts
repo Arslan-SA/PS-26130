@@ -91,18 +91,60 @@ export async function getClearanceSummary(businessId: string): Promise<Clearance
   return apiFetch<ClearanceSummary>(`/approvals/summary/${businessId}`);
 }
 
+export interface ApprovalStatusHistory {
+  id: string;
+  requirement_id: string;
+  business_id: string;
+  from_status?: RequirementStatus | null;
+  to_status: RequirementStatus;
+  changed_by_user_id?: string | null;
+  remarks?: string | null;
+  reference_number?: string | null;
+  created_at: string;
+}
+
+export interface ApprovalStatusUpdatePayload {
+  status: RequirementStatus;
+  notes?: string;
+  remarks?: string;
+  reference_number?: string;
+}
+
 /**
- * Update clearance requirement progress status or add notes.
+ * Update clearance requirement progress status with audit remarks and reference number.
  */
 export async function updateRequirementStatus(
   requirementId: string,
-  status: RequirementStatus,
+  payload: ApprovalStatusUpdatePayload | RequirementStatus,
   notes?: string
 ): Promise<ApprovalRequirement> {
+  const body =
+    typeof payload === "string"
+      ? { status: payload, notes }
+      : payload;
+
   return apiFetch<ApprovalRequirement>(`/approvals/requirements/${requirementId}/status`, {
     method: "PATCH",
-    body: JSON.stringify({ status, notes }),
+    body: JSON.stringify(body),
   });
+}
+
+/**
+ * Retrieve chronological status history audit trail for an approval requirement.
+ */
+export async function getRequirementStatusHistory(
+  requirementId: string
+): Promise<ApprovalStatusHistory[]> {
+  return apiFetch<ApprovalStatusHistory[]>(`/approvals/requirements/${requirementId}/history`);
+}
+
+/**
+ * Retrieve enterprise-wide statutory approval transition audit trail.
+ */
+export async function getBusinessStatusHistory(
+  businessId: string
+): Promise<ApprovalStatusHistory[]> {
+  return apiFetch<ApprovalStatusHistory[]>(`/approvals/history/${businessId}`);
 }
 
 export interface ChecklistItem {

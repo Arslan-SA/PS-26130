@@ -107,6 +107,13 @@ class ApprovalRequirement(BaseModel):
     # Relationships
     business = relationship("Business", backref="approval_requirements", lazy="selectin")
     approval = relationship("Approval", lazy="selectin")
+    status_history = relationship(
+        "ApprovalStatusHistory",
+        back_populates="requirement",
+        cascade="all, delete-orphan",
+        lazy="selectin",
+        order_by="desc(ApprovalStatusHistory.created_at)",
+    )
 
     def __repr__(self) -> str:
         return (

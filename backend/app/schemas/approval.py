@@ -216,4 +216,28 @@ class NextActionSummaryResponse(BaseModel):
     actions: List[NextActionItemRead]
 
 
+class ApprovalStatusHistoryRead(BaseModel):
+    """Audit log entry recording an immutable status transition."""
+    id: str
+    requirement_id: str
+    business_id: str
+    from_status: Optional[RequirementStatus] = None
+    to_status: RequirementStatus
+    changed_by_user_id: Optional[str] = None
+    remarks: Optional[str] = None
+    reference_number: Optional[str] = None
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ApprovalStatusUpdatePayload(BaseModel):
+    """Payload to update an approval requirement status with audit tracking."""
+    status: RequirementStatus
+    notes: Optional[str] = None
+    remarks: Optional[str] = None
+    reference_number: Optional[str] = None
+
+
+
 

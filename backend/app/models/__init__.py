@@ -10,6 +10,7 @@ from app.models.approval import Approval
 from app.models.approval_requirement import ApprovalRequirement, RequirementStatus, RequirementStage
 from app.models.department import Department, JurisdictionLevel
 from app.models.approval_dependency import ApprovalDependency, DependencyType
+from app.models.approval_status_history import ApprovalStatusHistory
 
 __all__ = [
     "BaseModel",
@@ -31,6 +32,7 @@ __all__ = [
     "JurisdictionLevel",
     "ApprovalDependency",
     "DependencyType",
+    "ApprovalStatusHistory",
 ]
 
 

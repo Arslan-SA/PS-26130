@@ -90,7 +90,8 @@
 | 52 | Dependency graph backend | `approvals` | `app/schemas/approval.py`, `app/api/approvals.py`, `test_dependency_graph_api.py` | `pytest test_dependency_graph_api.py` 1 passed (all 117 passed) | `434bb17` | ✅ Complete |
 | 53 | Dependency graph frontend | `frontend` | `frontend/src/app/approvals/graph/page.tsx`, `components/approvals/DependencyGraphView.tsx`, `lib/approvals.ts` | Next.js 14 static build (11/11 routes compiled) | `6f54c79` | ✅ Complete |
 | 54 | Personalized roadmap | `approvals` | `app/services/roadmap_service.py`, `app/api/approvals.py`, `components/approvals/PersonalizedRoadmapView.tsx`, `app/approvals/roadmap/page.tsx`, `test_roadmap_service.py` | `pytest test_roadmap_service.py` 2 passed, Next.js static build (12/12 routes) | `78428f7` | ✅ Complete |
-| 55 | Next-action engine | `approvals` | `app/services/next_action_engine.py`, `app/api/approvals.py`, `components/approvals/NextActionQueueView.tsx`, `app/approvals/actions/page.tsx`, `test_next_action_engine.py` | `pytest test_next_action_engine.py` 3 passed, Next.js static build (13/13 routes) | `pending` | ✅ Complete |
+| 55 | Next-action engine | `approvals` | `app/services/next_action_engine.py`, `app/api/approvals.py`, `components/approvals/NextActionQueueView.tsx`, `app/approvals/actions/page.tsx`, `test_next_action_engine.py` | `pytest test_next_action_engine.py` 3 passed, Next.js static build (13/13 routes) | `6b797aa` | ✅ Complete |
+| 56 | Approval status tracking | `approvals` | `app/models/approval_status_history.py`, `app/services/status_tracking_service.py`, `components/approvals/ApprovalStatusAuditTimeline.tsx`, `app/approvals/[id]/page.tsx`, `test_approval_status_history.py` | `pytest test_approval_status_history.py` 2 passed, Next.js static build (13/13 routes) | `pending` | ✅ Complete |
 
 
 

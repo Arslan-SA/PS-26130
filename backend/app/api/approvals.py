@@ -19,6 +19,8 @@ from app.models.user import User, UserRole
 from app.schemas.approval import (
     ApprovalChecklistRead,
     ApprovalRequirementRead,
+    ApprovalStatusHistoryRead,
+    ApprovalStatusUpdatePayload,
     ChecklistItemRead,
     ClearanceSummaryRead,
     DependencyGraphResponse,
@@ -35,6 +37,7 @@ from app.services.dependency_engine import DependencyEngineService
 from app.services.next_action_engine import NextActionEngineService
 from app.services.requirement_engine import RequirementEngineService
 from app.services.roadmap_service import RoadmapService
+from app.services.status_tracking_service import StatusTrackingService
 
 router = APIRouter(prefix="/approvals", tags=["Approvals & Clearances"])
 
@@ -132,11 +135,11 @@ async def get_requirement_by_id(
 @router.patch("/requirements/{requirement_id}/status", response_model=ApprovalRequirementRead)
 async def update_requirement_status(
     requirement_id: str,
-    payload: StatusUpdatePayload,
+    payload: ApprovalStatusUpdatePayload,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> ApprovalRequirementRead:
-    """Update requirement compliance lifecycle status and notes."""
+    """Update requirement compliance lifecycle status and record immutable audit history."""
     stmt = select(ApprovalRequirement).where(ApprovalRequirement.id == requirement_id)
     req = (await db.execute(stmt)).scalar_one_or_none()
     if not req:
@@ -144,13 +147,46 @@ async def update_requirement_status(
 
     await _verify_business_access(req.business_id, current_user, db)
 
-    req.status = payload.status
-    if payload.notes is not None:
-        req.notes = payload.notes
+    updated_req, _ = await StatusTrackingService.record_status_transition(
+        session=db,
+        requirement_id=requirement_id,
+        to_status=payload.status,
+        user_id=current_user.id,
+        remarks=payload.remarks or payload.notes,
+        reference_number=payload.reference_number,
+        notes=payload.notes,
+    )
+    return ApprovalRequirementRead.model_validate(updated_req)
 
-    await db.commit()
-    await db.refresh(req)
-    return ApprovalRequirementRead.model_validate(req)
+
+@router.get("/requirements/{requirement_id}/history", response_model=List[ApprovalStatusHistoryRead])
+async def get_requirement_status_history(
+    requirement_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> List[ApprovalStatusHistoryRead]:
+    """Retrieve full chronological audit trail of status transitions for an approval requirement."""
+    stmt = select(ApprovalRequirement).where(ApprovalRequirement.id == requirement_id)
+    req = (await db.execute(stmt)).scalar_one_or_none()
+    if not req:
+        raise NotFoundError("Approval requirement not found", details={"requirement_id": requirement_id})
+
+    await _verify_business_access(req.business_id, current_user, db)
+    history = await StatusTrackingService.get_history_for_requirement(db, requirement_id)
+    return [ApprovalStatusHistoryRead.model_validate(h) for h in history]
+
+
+@router.get("/history/{business_id}", response_model=List[ApprovalStatusHistoryRead])
+async def get_business_status_history(
+    business_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> List[ApprovalStatusHistoryRead]:
+    """Retrieve enterprise-wide statutory approval transition audit trail."""
+    await _verify_business_access(business_id, current_user, db)
+    history = await StatusTrackingService.get_history_for_business(db, business_id)
+    return [ApprovalStatusHistoryRead.model_validate(h) for h in history]
+
 
 
 @router.get("/{approval_code}/checklist", response_model=ApprovalChecklistRead)
