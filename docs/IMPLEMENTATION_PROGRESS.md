@@ -92,21 +92,11 @@
 | 54 | Personalized roadmap | `approvals` | `app/services/roadmap_service.py`, `app/api/approvals.py`, `components/approvals/PersonalizedRoadmapView.tsx`, `app/approvals/roadmap/page.tsx`, `test_roadmap_service.py` | `pytest test_roadmap_service.py` 2 passed, Next.js static build (12/12 routes) | `78428f7` | ✅ Complete |
 | 55 | Next-action engine | `approvals` | `app/services/next_action_engine.py`, `app/api/approvals.py`, `components/approvals/NextActionQueueView.tsx`, `app/approvals/actions/page.tsx`, `test_next_action_engine.py` | `pytest test_next_action_engine.py` 3 passed, Next.js static build (13/13 routes) | `6b797aa` | ✅ Complete |
 | 56 | Approval status tracking | `approvals` | `app/models/approval_status_history.py`, `app/services/status_tracking_service.py`, `components/approvals/ApprovalStatusAuditTimeline.tsx`, `app/approvals/[id]/page.tsx`, `test_approval_status_history.py` | `pytest test_approval_status_history.py` 2 passed, Next.js static build (13/13 routes) | `a56759b` | ✅ Complete |
-| 57 | Approval workflow testing | `approvals` | `backend/tests/test_approval_workflow_e2e.py` | `pytest test_approval_workflow_e2e.py` 2 passed (all 35 approval tests passed) | `pending` | ✅ Complete |
+| 57 | Approval workflow testing | `approvals` | `backend/tests/test_approval_workflow_e2e.py` | `pytest test_approval_workflow_e2e.py` 2 passed (all 35 approval tests passed) | `d5fea9a` | ✅ Complete |
+| 58 | Approval architecture documentation | `docs` | `docs/architecture/APPROVAL_ENGINE.md` | Comprehensive architectural guide with ER diagrams, DAG algorithms, and API specifications | `pending` | ✅ Complete |
 
+> **Phase 4 Status: ✅ 18/18 Fragments (100%) Complete** — Statutory Clearance Discovery, DAG Sequencing, Critical Path Calculations, Forward-Pass Roadmap, Dynamic Next Actions, Status History Tracking, and Workflow E2E Testing.
 
-
-
-
-
-
-
-
-
-
-
-
-*Upcoming Phase 4 fragments: 42. Approval requirement model, 43. Department model, 44. Approval rules, 45. Requirement engine, 46. Approval recommendation API, 47. Approval recommendation UI, 48. Approval checklist, 49. Approval detail page, 50. Approval dependency model, 51. Dependency engine, 52. Dependency graph backend, 53. Dependency graph frontend, 54. Personalized roadmap, 55. Next-action engine, 56. Approval status tracking, 57. Approval workflow testing, 58. Approval architecture documentation.*
 
 
 ## Phase 5: Document Intelligence (Fragments 59–75)
