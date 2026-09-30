@@ -77,6 +77,8 @@
 | # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
 |---|---|---|---|---|---|---|
 | 41 | Approval model | `approvals` | `app/models/approval.py`, `models/__init__.py`, `test_approval_model.py` | `pytest test_approval_model.py` 3 passed (all 87 passed) | `9259b2e` | ✅ Complete |
+| 42 | Approval requirement model | `approvals` | `app/models/approval_requirement.py`, `models/__init__.py`, `test_approval_requirement_model.py` | `pytest test_approval_requirement_model.py` 3 passed (all 90 passed) | `c5c993c` | ✅ Complete |
+
 
 *Upcoming Phase 4 fragments: 42. Approval requirement model, 43. Department model, 44. Approval rules, 45. Requirement engine, 46. Approval recommendation API, 47. Approval recommendation UI, 48. Approval checklist, 49. Approval detail page, 50. Approval dependency model, 51. Dependency engine, 52. Dependency graph backend, 53. Dependency graph frontend, 54. Personalized roadmap, 55. Next-action engine, 56. Approval status tracking, 57. Approval workflow testing, 58. Approval architecture documentation.*
 

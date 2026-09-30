@@ -7,6 +7,7 @@ from app.models.user import User, UserRole
 from app.models.business import Business, EntityType, MSMECategory
 from app.models.business_profile import BusinessProfile, IndustryScale, PollutionCategory
 from app.models.approval import Approval
+from app.models.approval_requirement import ApprovalRequirement, RequirementStatus, RequirementStage
 
 __all__ = [
     "BaseModel",
@@ -21,5 +22,9 @@ __all__ = [
     "IndustryScale",
     "PollutionCategory",
     "Approval",
+    "ApprovalRequirement",
+    "RequirementStatus",
+    "RequirementStage",
 ]
+
 
