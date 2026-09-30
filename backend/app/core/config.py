@@ -72,7 +72,7 @@ class Settings(BaseSettings):
     S3_SECRET_ACCESS_KEY: str = ""
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=(".env", "../.env"),
         env_file_encoding="utf-8",
         case_sensitive=True,
         extra="ignore",
