@@ -103,7 +103,7 @@
 
 | # | Fragment | Scope | Key Artifacts | Verification Method | Commit | Status |
 |---|---|---|---|---|---|---|
-| 59 | Document model | `documents` | `app/models/document.py`, `models/__init__.py`, `test_document_model.py` | `pytest test_document_model.py` 2 passed | `pending` | ✅ Complete |
+| 59 | Document model | `documents` | `app/models/document.py`, `models/__init__.py`, `test_document_model.py` | `pytest test_document_model.py` 2 passed | `09a53f0` | ✅ Complete |
 
 *Upcoming Phase 5 fragments: 60. Document storage abstraction, 61. Document upload API, 62. Secure document access, 63. Document upload UI, 64. OCR integration, 65. OCR processing pipeline, 66. Document type classification, 67. Field extraction, 68. Document validation engine, 69. Required-document matching, 70. Missing-document detection, 71. Expiry detection, 72. Business-profile mismatch detection, 73. Document health dashboard, 74. Document processing error handling, 75. Document intelligence testing.*
 
