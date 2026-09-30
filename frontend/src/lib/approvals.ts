@@ -104,3 +104,35 @@ export async function updateRequirementStatus(
     body: JSON.stringify({ status, notes }),
   });
 }
+
+export interface ChecklistItem {
+  item_id: string;
+  title: string;
+  category: "FORM" | "DOCUMENT" | "PREREQUISITE" | "INSPECTION";
+  description: string;
+  is_mandatory: boolean;
+  template_url?: string | null;
+}
+
+export interface ApprovalChecklist {
+  approval_code: string;
+  approval_title: string;
+  issuing_authority: string;
+  statutory_act: string;
+  items: ChecklistItem[];
+}
+
+/**
+ * Retrieve statutory prerequisite checklist by approval code.
+ */
+export async function getApprovalChecklist(approvalCode: string): Promise<ApprovalChecklist> {
+  return apiFetch<ApprovalChecklist>(`/approvals/${approvalCode}/checklist`);
+}
+
+/**
+ * Retrieve statutory checklist for a specific requirement instance.
+ */
+export async function getRequirementChecklist(requirementId: string): Promise<ApprovalChecklist> {
+  return apiFetch<ApprovalChecklist>(`/approvals/requirements/${requirementId}/checklist`);
+}
+

@@ -64,3 +64,23 @@ class DiscoveryResponse(BaseModel):
     count: int
     requirements: List[ApprovalRequirementRead]
     summary: ClearanceSummaryRead
+
+
+class ChecklistItemRead(BaseModel):
+    """Individual checklist item schema."""
+    item_id: str
+    title: str
+    category: str
+    description: str
+    is_mandatory: bool
+    template_url: Optional[str] = None
+
+
+class ApprovalChecklistRead(BaseModel):
+    """Full statutory checklist schema."""
+    approval_code: str
+    approval_title: str
+    issuing_authority: str
+    statutory_act: str
+    items: List[ChecklistItemRead]
+

@@ -16,10 +16,13 @@ from app.models.approval_requirement import ApprovalRequirement, RequirementStat
 from app.models.business import Business
 from app.models.user import User, UserRole
 from app.schemas.approval import (
+    ApprovalChecklistRead,
     ApprovalRequirementRead,
+    ChecklistItemRead,
     ClearanceSummaryRead,
     DiscoveryResponse,
 )
+from app.services.approval_checklist import get_approval_checklist
 from app.services.requirement_engine import RequirementEngineService
 
 router = APIRouter(prefix="/approvals", tags=["Approvals & Clearances"])
@@ -121,3 +124,53 @@ async def update_requirement_status(
     await db.commit()
     await db.refresh(req)
     return ApprovalRequirementRead.model_validate(req)
+
+
+@router.get("/{approval_code}/checklist", response_model=ApprovalChecklistRead)
+async def get_checklist_by_code(
+    approval_code: str,
+    current_user: User = Depends(get_current_user),
+) -> ApprovalChecklistRead:
+    """Retrieve the statutory checklist for an approval code."""
+    checklist = get_approval_checklist(approval_code.upper())
+    if not checklist:
+        raise NotFoundError("Checklist not found for this clearance code", details={"code": approval_code})
+    return ApprovalChecklistRead(
+        approval_code=checklist.approval_code,
+        approval_title=checklist.approval_title,
+        issuing_authority=checklist.issuing_authority,
+        statutory_act=checklist.statutory_act,
+        items=[ChecklistItemRead(**item.__dict__) for item in checklist.items],
+    )
+
+
+@router.get("/requirements/{requirement_id}/checklist", response_model=ApprovalChecklistRead)
+async def get_checklist_for_requirement(
+    requirement_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> ApprovalChecklistRead:
+    """Retrieve statutory checklist customized for a specific requirement instance."""
+    stmt = (
+        select(ApprovalRequirement, Approval)
+        .join(Approval, ApprovalRequirement.approval_id == Approval.id)
+        .where(ApprovalRequirement.id == requirement_id)
+    )
+    res = (await db.execute(stmt)).first()
+    if not res:
+        raise NotFoundError("Requirement not found", details={"requirement_id": requirement_id})
+    req, approval = res
+    await _verify_business_access(req.business_id, current_user, db)
+
+    checklist = get_approval_checklist(approval.code)
+    if not checklist:
+        raise NotFoundError("Checklist not found for clearance code", details={"code": approval.code})
+
+    return ApprovalChecklistRead(
+        approval_code=checklist.approval_code,
+        approval_title=checklist.approval_title,
+        issuing_authority=checklist.issuing_authority,
+        statutory_act=checklist.statutory_act,
+        items=[ChecklistItemRead(**item.__dict__) for item in checklist.items],
+    )
+
