@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse
 
 from app.api.admin import router as admin_router
 from app.api.auth import router as auth_router
+from app.api.business import router as business_router
 from app.api.health import router as health_router
 from app.api.industry import router as industry_router
 from app.api.inspector import router as inspector_router
@@ -64,6 +65,7 @@ def create_application() -> FastAPI:
     # Include API Routers
     app.include_router(health_router)
     app.include_router(auth_router, prefix=settings.API_V1_STR)
+    app.include_router(business_router, prefix=settings.API_V1_STR)
     app.include_router(industry_router, prefix=settings.API_V1_STR)
     app.include_router(officer_router, prefix=settings.API_V1_STR)
     app.include_router(inspector_router, prefix=settings.API_V1_STR)
