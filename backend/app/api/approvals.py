@@ -13,6 +13,7 @@ from app.core.dependencies import get_current_user
 from app.core.exceptions import AuthorizationError, NotFoundError
 from app.models.approval import Approval
 from app.models.approval_requirement import ApprovalRequirement, RequirementStatus
+from app.models.approval_dependency import ApprovalDependency, DependencyType
 from app.models.business import Business
 from app.models.user import User, UserRole
 from app.schemas.approval import (
@@ -20,9 +21,13 @@ from app.schemas.approval import (
     ApprovalRequirementRead,
     ChecklistItemRead,
     ClearanceSummaryRead,
+    DependencyGraphResponse,
     DiscoveryResponse,
+    GraphEdge,
+    GraphNode,
 )
 from app.services.approval_checklist import get_approval_checklist
+from app.services.dependency_engine import DependencyEngineService
 from app.services.requirement_engine import RequirementEngineService
 
 router = APIRouter(prefix="/approvals", tags=["Approvals & Clearances"])
@@ -189,4 +194,104 @@ async def get_checklist_for_requirement(
         statutory_act=checklist.statutory_act,
         items=[ChecklistItemRead(**item.__dict__) for item in checklist.items],
     )
+
+
+@router.get("/graph/{business_id}", response_model=DependencyGraphResponse)
+async def get_approval_dependency_graph(
+    business_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> DependencyGraphResponse:
+    """
+    Generate the complete statutory clearance Directed Acyclic Graph (DAG) for an enterprise.
+    Returns nodes with real-time unlock/blocking status, prerequisite edges, topological order,
+    and critical turnaround path calculations.
+    """
+    await _verify_business_access(business_id, current_user, db)
+
+    # 1. Fetch requirements and parent approvals
+    stmt = (
+        select(ApprovalRequirement, Approval)
+        .join(Approval, ApprovalRequirement.approval_id == Approval.id)
+        .where(ApprovalRequirement.business_id == business_id)
+    )
+    rows = (await db.execute(stmt)).all()
+
+    # If empty, run discovery once automatically
+    if not rows:
+        await RequirementEngineService.generate_requirements_for_business(db, business_id)
+        rows = (await db.execute(stmt)).all()
+
+    active_rows = [
+        (req, app) for req, app in rows if req.status != RequirementStatus.EXEMPTED
+    ]
+
+    code_by_approval_id = {app.id: app.code for _, app in active_rows}
+    active_codes = set(code_by_approval_id.values())
+    sla_by_code = {app.code: req.sla_deadline_days for req, app in active_rows}
+
+    # 2. Evaluate real-time prerequisite unlock states
+    reqs = [r for r, _ in active_rows]
+    unlock_map = await DependencyEngineService.evaluate_requirement_unlocks(
+        db, reqs, code_by_approval_id
+    )
+
+    # 3. Fetch dependencies and filter edges between active nodes
+    dep_stmt = select(ApprovalDependency)
+    dependencies = (await db.execute(dep_stmt)).scalars().all()
+
+    edges: List[GraphEdge] = []
+    dag_edges: List[tuple[str, str]] = []
+
+    for d in dependencies:
+        if d.from_approval_code in active_codes and d.to_approval_code in active_codes:
+            edges.append(
+                GraphEdge(
+                    id=f"{d.from_approval_code}->{d.to_approval_code}",
+                    source=d.from_approval_code,
+                    target=d.to_approval_code,
+                    dependency_type=d.dependency_type.value,
+                    description=d.description,
+                )
+            )
+            if d.dependency_type == DependencyType.MANDATORY_PREREQUISITE:
+                dag_edges.append((d.from_approval_code, d.to_approval_code))
+
+    # 4. Topological order and critical path
+    node_codes = list(active_codes)
+    topological_order = DependencyEngineService.topological_sort(node_codes, dag_edges)
+    critical_days, critical_path = DependencyEngineService.calculate_critical_path(
+        node_codes, dag_edges, sla_by_code
+    )
+
+    # 5. Build GraphNode objects
+    nodes: List[GraphNode] = []
+    for req, app in active_rows:
+        unlock_info = unlock_map.get(app.code)
+        nodes.append(
+            GraphNode(
+                id=app.code,
+                requirement_id=req.id,
+                title=app.title,
+                department_code=app.department_code,
+                issuing_authority=app.issuing_authority,
+                stage=req.stage,
+                status=req.status,
+                is_unlocked=unlock_info.is_unlocked if unlock_info else True,
+                missing_prerequisites=unlock_info.missing_prerequisites if unlock_info else [],
+                estimated_fee=req.estimated_fee,
+                sla_days=req.sla_deadline_days,
+                priority=req.priority,
+            )
+        )
+
+    return DependencyGraphResponse(
+        business_id=business_id,
+        nodes=nodes,
+        edges=edges,
+        topological_order=topological_order,
+        critical_path=critical_path,
+        critical_path_days=critical_days,
+    )
+
 

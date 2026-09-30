@@ -84,3 +84,39 @@ class ApprovalChecklistRead(BaseModel):
     statutory_act: str
     items: List[ChecklistItemRead]
 
+
+class GraphNode(BaseModel):
+    """DAG node representing an individual clearance requirement."""
+    id: str
+    requirement_id: str
+    title: str
+    department_code: str
+    issuing_authority: str
+    stage: RequirementStage
+    status: RequirementStatus
+    is_unlocked: bool
+    missing_prerequisites: List[str]
+    estimated_fee: float
+    sla_days: int
+    priority: int
+
+
+class GraphEdge(BaseModel):
+    """DAG edge representing a prerequisite dependency."""
+    id: str
+    source: str
+    target: str
+    dependency_type: str
+    description: Optional[str] = None
+
+
+class DependencyGraphResponse(BaseModel):
+    """Complete statutory clearance DAG response."""
+    business_id: str
+    nodes: List[GraphNode]
+    edges: List[GraphEdge]
+    topological_order: List[str]
+    critical_path: List[str]
+    critical_path_days: int
+
+
