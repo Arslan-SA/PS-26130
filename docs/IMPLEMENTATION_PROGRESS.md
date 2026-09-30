@@ -7,8 +7,8 @@
 
 ## Progress Summary
 - **Total Fragments**: 150
-- **Completed**: 30
-- **Remaining**: 120
+- **Completed**: 31
+- **Remaining**: 119
 - **Current Phase**: Phase 3 — Business Onboarding (Fragments 29–40)
 
 ---
@@ -60,8 +60,8 @@
 | # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
 |---|---|---|---|---|---|---|
 | 29 | Business model | `business` | `app/models/business.py`, `app/models/user.py`, `models/__init__.py` | `pytest test_business_model.py` 3 passed (all 48 passed) | `77648f6` | ✅ Complete |
-| 30 | Business profile model | `business` | `app/models/business_profile.py`, `app/models/business.py`, `models/__init__.py` | `pytest test_business_profile_model.py` 3 passed (all 51 passed) | Pending | ✅ Complete |
-| 31 | Industry onboarding | `business` | Onboarding orchestration and business creation service | Onboarding service tests | — | ⏳ Planned |
+| 30 | Business profile model | `business` | `app/models/business_profile.py`, `app/models/business.py`, `models/__init__.py` | `pytest test_business_profile_model.py` 3 passed (all 51 passed) | `a420e2b` | ✅ Complete |
+| 31 | Industry onboarding | `business` | `app/schemas/business.py`, `app/services/business_service.py`, `test_business_onboarding_service.py` | `pytest test_business_onboarding_service.py` 4 passed (all 55 passed) | Pending | ✅ Complete |
 | 32 | Business profile UI | `frontend` | Business profile onboarding wizard and form steps | Next.js compilation | — | ⏳ Planned |
 | 33 | Industry classification | `business` | CPCB Red/Orange/Green/White classification engine | Classification tests | — | ⏳ Planned |
 | 34 | Location information | `business` | Plot, state, district, and industrial park mapping | Location validation tests | — | ⏳ Planned |
