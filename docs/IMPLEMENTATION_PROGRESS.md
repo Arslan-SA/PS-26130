@@ -45,8 +45,8 @@
 | 19 | Login | `auth` | `app/schemas/user.py`, `auth_service.py`, `api/auth.py` | `pytest test_login.py` 3 passed | `04b7c4f` | ✅ Complete |
 | 20 | JWT authentication | `auth` | `app/core/security.py`, `dependencies.py`, `/auth/me` | `pytest test_jwt_auth.py` 4 passed | `03e53d0` | ✅ Complete |
 | 21 | Refresh/session handling | `auth` | `app/schemas/user.py`, `auth_service.py`, `/auth/refresh` | `pytest test_refresh_token.py` 2 passed | `1ddbf2a` | ✅ Complete |
-| 22 | RBAC middleware | `auth` | `app/core/dependencies.py`, `test_rbac.py` | `pytest test_rbac.py` 2 passed | `pending` | 🔄 In Progress |
-| 23 | Industry role | `auth` | Industry user portal scope & profile links | Scoped access test | — | ⏳ Planned |
+| 22 | RBAC middleware | `auth` | `app/core/dependencies.py`, `test_rbac.py` | `pytest test_rbac.py` 2 passed | `3aed471` | ✅ Complete |
+| 23 | Industry role | `auth` | `app/api/industry.py`, `test_role_industry.py` | `pytest test_role_industry.py` 2 passed | `pending` | 🔄 In Progress |
 | 24 | Officer role | `auth` | Officer portal scope & department isolation | Department boundary test | — | ⏳ Planned |
 | 25 | Inspector role | `auth` | Inspector portal scope & assigned site queues | Inspector access test | — | ⏳ Planned |
 | 26 | Admin role | `auth` | Admin full access scope & user management | Admin privileges test | — | ⏳ Planned |

@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse
 
 from app.api.auth import router as auth_router
 from app.api.health import router as health_router
+from app.api.industry import router as industry_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import setup_logging
@@ -60,6 +61,7 @@ def create_application() -> FastAPI:
     # Include API Routers
     app.include_router(health_router)
     app.include_router(auth_router, prefix=settings.API_V1_STR)
+    app.include_router(industry_router, prefix=settings.API_V1_STR)
 
     @app.get("/", tags=["Root"])
     async def root() -> JSONResponse:
