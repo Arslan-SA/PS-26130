@@ -7,9 +7,9 @@
 
 ## Progress Summary
 - **Total Fragments**: 150
-- **Completed**: 1
-- **Remaining**: 149
-- **Current Phase**: Phase 1 — Foundation
+- **Completed**: 28
+- **Remaining**: 122
+- **Current Phase**: Phase 2 — Authentication & RBAC (Completed)
 
 ---
 
@@ -50,8 +50,8 @@
 | 24 | Officer role | `auth` | `app/api/officer.py`, `test_role_officer.py` | `pytest test_role_officer.py` 2 passed | `6682e35` | ✅ Complete |
 | 25 | Inspector role | `auth` | `app/api/inspector.py`, `test_role_inspector.py` | `pytest test_role_inspector.py` 2 passed | `4a5ce77` | ✅ Complete |
 | 26 | Admin role | `auth` | `app/api/admin.py`, `test_role_admin.py` | `pytest test_role_admin.py` 3 passed | `f0f8c60` | ✅ Complete |
-| 27 | Protected frontend routes | `frontend` | Auth context, Navbar, login/register & unauthorized pages | `npm run build` static compilation | `pending` | 🔄 In Progress |
-| 28 | Authentication testing | `auth` | End-to-end multi-role auth test suite | Full test suite passed | — | ⏳ Planned |
+| 27 | Protected frontend routes | `frontend` | Auth context, Navbar, login/register & unauthorized pages | `npm run build` static compilation | `ec80316` | ✅ Complete |
+| 28 | Authentication testing | `auth` | `backend/tests/test_auth_e2e.py` | `pytest test_auth_e2e.py` 4 passed (all 45 tests passed) | `6df1b61` | ✅ Complete |
 
 ## Phase 3: Business Onboarding (Fragments 29–40)
 *29. Business model, 30. Business profile model, 31. Industry onboarding, 32. Business profile UI, 33. Industry classification, 34. Location information, 35. Investment information, 36. Business dashboard, 37. Profile completeness, 38. Profile validation, 39. Business profile APIs, 40. Onboarding testing.*

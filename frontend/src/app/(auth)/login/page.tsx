@@ -42,12 +42,10 @@ export default function LoginPage() {
 
     try {
       const data = await apiFetch<{
-        tokens: {
-          access_token: string;
-          refresh_token: string;
-          token_type: string;
-          expires_in: number;
-        };
+        access_token: string;
+        refresh_token: string;
+        token_type: string;
+        expires_in: number;
         user: {
           id: string;
           email: string;
@@ -62,7 +60,7 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      login(data.tokens, data.user);
+      login({ access_token: data.access_token, refresh_token: data.refresh_token }, data.user);
 
       // Route by role
       switch (data.user.role) {
