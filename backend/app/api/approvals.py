@@ -102,6 +102,22 @@ async def get_clearance_summary(
     return ClearanceSummaryRead(**summary_data)
 
 
+@router.get("/requirements/{requirement_id}", response_model=ApprovalRequirementRead)
+async def get_requirement_by_id(
+    requirement_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> ApprovalRequirementRead:
+    """Retrieve requirement details with parent approval metadata."""
+    stmt = select(ApprovalRequirement).where(ApprovalRequirement.id == requirement_id)
+    req = (await db.execute(stmt)).scalar_one_or_none()
+    if not req:
+        raise NotFoundError("Approval requirement not found", details={"requirement_id": requirement_id})
+
+    await _verify_business_access(req.business_id, current_user, db)
+    return ApprovalRequirementRead.model_validate(req)
+
+
 @router.patch("/requirements/{requirement_id}/status", response_model=ApprovalRequirementRead)
 async def update_requirement_status(
     requirement_id: str,

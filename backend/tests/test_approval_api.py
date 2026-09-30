@@ -168,3 +168,25 @@ async def test_update_requirement_status(api_fixtures):
         updated = patch_resp.json()
         assert updated["status"] == "IN_PROGRESS"
         assert updated["notes"] == "Application dossier in drafting."
+
+
+@pytest.mark.asyncio
+async def test_get_requirement_by_id(api_fixtures):
+    """Verify retrieving a specific approval requirement by ID."""
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
+        disc_resp = await client.post(
+            f"/api/v1/approvals/discover/{api_fixtures['business_id']}",
+            headers=api_fixtures["owner_headers"],
+        )
+        req_id = disc_resp.json()["requirements"][0]["id"]
+
+        get_resp = await client.get(
+            f"/api/v1/approvals/requirements/{req_id}",
+            headers=api_fixtures["owner_headers"],
+        )
+        assert get_resp.status_code == 200
+        data = get_resp.json()
+        assert data["id"] == req_id
+        assert "approval" in data
+        assert data["approval"]["code"] is not None
+

@@ -136,3 +136,11 @@ export async function getRequirementChecklist(requirementId: string): Promise<Ap
   return apiFetch<ApprovalChecklist>(`/approvals/requirements/${requirementId}/checklist`);
 }
 
+/**
+ * Retrieve an individual approval requirement by its ID.
+ */
+export async function getRequirementById(requirementId: string): Promise<ApprovalRequirement> {
+  return apiFetch<ApprovalRequirement>(`/approvals/requirements/${requirementId}`);
+}
+
+
