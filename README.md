@@ -773,7 +773,7 @@ Potential integration with official government systems and APIs, **subject to au
 
 | Name | Role | GitHub |
 |---|---|---|
-| _Add name_ | _Add role_ | [@username](https://github.com/username) |
+| Arslan Ansari | _Team Leader| [@username](https://github.com/username) |
 | _Add name_ | _Add role_ | [@username](https://github.com/username) |
 
 **Team name:** _add here_ · **Institution:** _add here_ · **SIH 2026 problem statement:** SIH26130
