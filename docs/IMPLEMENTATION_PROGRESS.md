@@ -48,8 +48,8 @@
 | 22 | RBAC middleware | `auth` | `app/core/dependencies.py`, `test_rbac.py` | `pytest test_rbac.py` 2 passed | `3aed471` | ✅ Complete |
 | 23 | Industry role | `auth` | `app/api/industry.py`, `test_role_industry.py` | `pytest test_role_industry.py` 2 passed | `ca86ea7` | ✅ Complete |
 | 24 | Officer role | `auth` | `app/api/officer.py`, `test_role_officer.py` | `pytest test_role_officer.py` 2 passed | `6682e35` | ✅ Complete |
-| 25 | Inspector role | `auth` | `app/api/inspector.py`, `test_role_inspector.py` | `pytest test_role_inspector.py` 2 passed | `pending` | 🔄 In Progress |
-| 26 | Admin role | `auth` | Admin full access scope & user management | Admin privileges test | — | ⏳ Planned |
+| 25 | Inspector role | `auth` | `app/api/inspector.py`, `test_role_inspector.py` | `pytest test_role_inspector.py` 2 passed | `4a5ce77` | ✅ Complete |
+| 26 | Admin role | `auth` | `app/api/admin.py`, `test_role_admin.py` | `pytest test_role_admin.py` 3 passed | `pending` | 🔄 In Progress |
 | 27 | Protected frontend routes | `frontend` | Auth context, middleware & login/register pages | Route protection validation | — | ⏳ Planned |
 | 28 | Authentication testing | `auth` | End-to-end multi-role auth test suite | Full test suite passed | — | ⏳ Planned |
 
