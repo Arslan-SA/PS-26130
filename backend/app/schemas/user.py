@@ -20,6 +20,12 @@ class UserRegisterRequest(BaseModel):
     designation: Optional[str] = Field(default=None, max_length=100, description="Job title / designation")
 
 
+class UserLoginRequest(BaseModel):
+    """Payload for authenticating user credentials."""
+    email: EmailStr = Field(..., description="Registered email address")
+    password: str = Field(..., description="Account password")
+
+
 class UserResponse(BaseModel):
     """Public representation of user identity."""
     model_config = ConfigDict(from_attributes=True)
@@ -34,3 +40,12 @@ class UserResponse(BaseModel):
     is_verified: bool
     is_active: bool
     created_at: datetime
+
+
+class TokenResponse(BaseModel):
+    """Standard Bearer token envelope with refresh token and user identity."""
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+    expires_in: int
+    user: UserResponse

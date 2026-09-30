@@ -5,7 +5,7 @@ Authentication and user lifecycle domain business service.
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.exceptions import ConflictError, ValidationError
+from app.core.exceptions import AuthenticationError, ConflictError, ValidationError
 from app.core.security import get_password_hash, validate_password_strength
 from app.models.user import User, UserRole
 from app.schemas.user import UserRegisterRequest
@@ -47,4 +47,26 @@ async def register_user(db: AsyncSession, request: UserRegisterRequest) -> User:
     db.add(user)
     await db.commit()
     await db.refresh(user)
+    return user
+
+
+async def authenticate_user(db: AsyncSession, email: str, password: str) -> User:
+    """
+    Authenticate user credentials against hashed password.
+    Raises AuthenticationError on invalid credentials or deactivated accounts.
+    """
+    stmt = select(User).where(User.email == email.lower().strip())
+    result = await db.execute(stmt)
+    user = result.scalar_one_or_none()
+
+    if not user:
+        raise AuthenticationError("Invalid email or password.")
+
+    if not user.is_active:
+        raise AuthenticationError("This user account has been deactivated.")
+
+    from app.core.security import verify_password
+    if not verify_password(password, user.hashed_password):
+        raise AuthenticationError("Invalid email or password.")
+
     return user
