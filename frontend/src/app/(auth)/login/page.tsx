@@ -6,20 +6,6 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth/AuthProvider";
 import { apiFetch, UserRole } from "@/lib/auth";
 
-interface DemoAccount {
-  label: string;
-  role: UserRole;
-  email: string;
-  badgeColor: string;
-}
-
-const DEMO_ACCOUNTS: DemoAccount[] = [
-  { label: "Industry User", role: "INDUSTRY_USER", email: "rajesh.patel@bharatsteel.com", badgeColor: "bg-blue-100 text-blue-800 border-blue-200" },
-  { label: "Dept Officer", role: "DEPARTMENT_OFFICER", email: "officer.verma@spcb.gov.in", badgeColor: "bg-emerald-100 text-emerald-800 border-emerald-200" },
-  { label: "Inspector", role: "INSPECTOR", email: "inspector.sharma@fire.gov.in", badgeColor: "bg-amber-100 text-amber-800 border-amber-200" },
-  { label: "Admin", role: "ADMIN", email: "admin.super@udyamsetu.gov.in", badgeColor: "bg-purple-100 text-purple-800 border-purple-200" },
-];
-
 export default function LoginPage() {
   const router = useRouter();
   const { login } = useAuth();
@@ -28,12 +14,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleQuickFill = (acc: DemoAccount) => {
-    setEmail(acc.email);
-    setPassword("Enterprise@2026");
-    setErrorMsg(null);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,24 +81,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Quick Demo Credentials Banner */}
-        <div className="bg-slate-50 p-3.5 rounded-lg border border-slate-200">
-          <p className="text-xs font-semibold text-slate-600 mb-2 uppercase tracking-wider">
-            Quick Fill Demo Accounts (SIH Evaluator Mode):
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {DEMO_ACCOUNTS.map((acc) => (
-              <button
-                key={acc.role}
-                type="button"
-                onClick={() => handleQuickFill(acc)}
-                className={`text-xs px-2.5 py-1.5 rounded border font-medium transition-all text-left truncate ${acc.badgeColor} hover:opacity-90`}
-              >
-                {acc.label}
-              </button>
-            ))}
-          </div>
-        </div>
 
         {errorMsg && (
           <div className="bg-red-50 border-l-4 border-red-500 p-3.5 rounded">
