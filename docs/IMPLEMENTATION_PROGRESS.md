@@ -78,7 +78,9 @@
 |---|---|---|---|---|---|---|
 | 41 | Approval model | `approvals` | `app/models/approval.py`, `models/__init__.py`, `test_approval_model.py` | `pytest test_approval_model.py` 3 passed (all 87 passed) | `9259b2e` | ✅ Complete |
 | 42 | Approval requirement model | `approvals` | `app/models/approval_requirement.py`, `models/__init__.py`, `test_approval_requirement_model.py` | `pytest test_approval_requirement_model.py` 3 passed (all 90 passed) | `18bed51` | ✅ Complete |
-| 43 | Department model | `approvals` | `app/models/department.py`, `models/__init__.py`, `test_department_model.py` | `pytest test_department_model.py` 3 passed (all 93 passed) | `421af40` | ✅ Complete |
+| 43 | Department model | `approvals` | `app/models/department.py`, `models/__init__.py`, `test_department_model.py` | `pytest test_department_model.py` 3 passed (all 93 passed) | `155b31b` | ✅ Complete |
+| 44 | Approval rules | `approvals` | `app/services/approval_rules.py`, `test_approval_rules.py` | `pytest test_approval_rules.py` 4 passed (all 97 passed) | `85e5f40` | ✅ Complete |
+
 
 
 
