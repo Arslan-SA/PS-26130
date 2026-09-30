@@ -7,9 +7,9 @@
 
 ## Progress Summary
 - **Total Fragments**: 150
-- **Completed**: 39
-- **Remaining**: 111
-- **Current Phase**: Phase 3 — Business Onboarding (Fragments 29–40)
+- **Completed**: 40
+- **Remaining**: 110
+- **Current Phase**: Phase 4 — Approval Engine (Fragments 41–58)
 
 ---
 
@@ -69,8 +69,8 @@
 | 36 | Business dashboard | `frontend` | `frontend/src/app/dashboard/page.tsx` | Next.js 14 static compilation (9/9 routes generated) | `ab03594` | ✅ Complete |
 | 37 | Profile completeness | `business` | `app/services/completeness_service.py`, `backend/tests/test_completeness_service.py` | `pytest test_completeness_service.py` 3 passed (all 72 passed) | `ccd120b` | ✅ Complete |
 | 38 | Profile validation | `business` | `app/services/validation_service.py`, `backend/tests/test_statutory_validation.py` | `pytest test_statutory_validation.py` 4 passed (all 76 passed) | `08da8cf` | ✅ Complete |
-| 39 | Business profile APIs | `business` | `app/api/business.py`, `app/main.py`, `backend/tests/test_business_api.py` | `pytest test_business_api.py` 4 passed (all 80 passed) | Pending | ✅ Complete |
-| 40 | Onboarding testing | `business` | Full end-to-end industrial onboarding suite | Full test suite passed | — | ⏳ Planned |
+| 39 | Business profile APIs | `business` | `app/api/business.py`, `app/main.py`, `backend/tests/test_business_api.py` | `pytest test_business_api.py` 4 passed (all 80 passed) | `961c4d4` | ✅ Complete |
+| 40 | Onboarding testing | `business` | `backend/tests/test_onboarding_e2e.py` | `pytest test_onboarding_e2e.py` 4 passed (all 84 passed) | Pending | ✅ Complete |
 
 ## Phase 4: Approval Engine (Fragments 41–58)
 *41. Approval model, 42. Approval requirement model, 43. Department model, 44. Approval rules, 45. Requirement engine, 46. Approval recommendation API, 47. Approval recommendation UI, 48. Approval checklist, 49. Approval detail page, 50. Approval dependency model, 51. Dependency engine, 52. Dependency graph backend, 53. Dependency graph frontend, 54. Personalized roadmap, 55. Next-action engine, 56. Approval status tracking, 57. Approval workflow testing, 58. Approval architecture documentation.*
