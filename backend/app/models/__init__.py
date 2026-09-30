@@ -9,6 +9,7 @@ from app.models.business_profile import BusinessProfile, IndustryScale, Pollutio
 from app.models.approval import Approval
 from app.models.approval_requirement import ApprovalRequirement, RequirementStatus, RequirementStage
 from app.models.department import Department, JurisdictionLevel
+from app.models.approval_dependency import ApprovalDependency, DependencyType
 
 __all__ = [
     "BaseModel",
@@ -28,7 +29,10 @@ __all__ = [
     "RequirementStage",
     "Department",
     "JurisdictionLevel",
+    "ApprovalDependency",
+    "DependencyType",
 ]
+
 
 
 
