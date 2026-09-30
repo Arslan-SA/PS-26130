@@ -64,11 +64,23 @@ export default function ApprovalsGraphPage() {
                 href="/approvals"
                 className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
               >
-                Cards View
+                Cards
               </Link>
               <span className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white shadow-sm">
-                Dependency DAG
+                DAG Graph
               </span>
+              <Link
+                href="/approvals/roadmap"
+                className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
+              >
+                Roadmap
+              </Link>
+              <Link
+                href="/approvals/actions"
+                className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
+              >
+                Next Actions
+              </Link>
             </div>
           </div>
 

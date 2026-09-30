@@ -3,6 +3,7 @@ Pydantic schemas for Approval catalog items, requirement discovery, and complian
 """
 
 from datetime import datetime
+from enum import Enum
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -160,6 +161,59 @@ class RoadmapPlanResponse(BaseModel):
     critical_path_days: int
     activities: List[RoadmapActivityRead]
     milestones: List[RoadmapMilestoneRead]
+
+
+class ActionPriority(str, Enum):
+    """Urgency tier for statutory next actions."""
+    CRITICAL = "CRITICAL"
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+
+
+class ActionType(str, Enum):
+    """Categorical classification of the statutory action required."""
+    APPLY_NOW = "APPLY_NOW"
+    PREPARE_DOCS = "PREPARE_DOCS"
+    PAY_FEES = "PAY_FEES"
+    TRACK_SLA = "TRACK_SLA"
+    RESOLVE_PREREQUISITES = "RESOLVE_PREREQUISITES"
+    DOWNLOAD_CERTIFICATE = "DOWNLOAD_CERTIFICATE"
+
+
+class NextActionItemRead(BaseModel):
+    """Immediate actionable statutory clearance task."""
+    approval_code: str
+    requirement_id: str
+    approval_id: str
+    title: str
+    department_code: str
+    stage: RequirementStage
+    current_status: RequirementStatus
+    action_type: ActionType
+    priority: ActionPriority
+    priority_score: int
+    headline: str
+    rationale: str
+    sla_days: int
+    estimated_fee: float
+    is_critical_path: bool
+    is_unlocked: bool
+    blocked_by: List[str]
+    target_url: str
+
+
+class NextActionSummaryResponse(BaseModel):
+    """Summary of prioritized next statutory actions across enterprise portfolio."""
+    business_id: str
+    total_clearances: int
+    ready_to_act_count: int
+    critical_path_actions_count: int
+    blocked_count: int
+    under_review_count: int
+    completed_count: int
+    top_immediate_action: Optional[NextActionItemRead] = None
+    actions: List[NextActionItemRead]
 
 
 

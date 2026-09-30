@@ -107,7 +107,31 @@ export default function ApprovalsRecommendationPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800">
+                <span className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white shadow-sm">
+                  Cards
+                </span>
+                <Link
+                  href="/approvals/graph"
+                  className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
+                >
+                  DAG Graph
+                </Link>
+                <Link
+                  href="/approvals/roadmap"
+                  className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
+                >
+                  Roadmap
+                </Link>
+                <Link
+                  href="/approvals/actions"
+                  className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
+                >
+                  Next Actions
+                </Link>
+              </div>
+
               <button
                 onClick={handleReevaluate}
                 disabled={evaluating || !business}

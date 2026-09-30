@@ -228,6 +228,56 @@ export async function getClearanceRoadmap(businessId: string): Promise<RoadmapPl
   return apiFetch<RoadmapPlan>(`/approvals/roadmap/${businessId}`);
 }
 
+export type ActionPriority = "CRITICAL" | "HIGH" | "MEDIUM" | "LOW";
+
+export type ActionType =
+  | "APPLY_NOW"
+  | "PREPARE_DOCS"
+  | "PAY_FEES"
+  | "TRACK_SLA"
+  | "RESOLVE_PREREQUISITES"
+  | "DOWNLOAD_CERTIFICATE";
+
+export interface NextActionItem {
+  approval_code: string;
+  requirement_id: string;
+  approval_id: string;
+  title: string;
+  department_code: string;
+  stage: RequirementStage;
+  current_status: RequirementStatus;
+  action_type: ActionType;
+  priority: ActionPriority;
+  priority_score: number;
+  headline: string;
+  rationale: string;
+  sla_days: number;
+  estimated_fee: number;
+  is_critical_path: boolean;
+  is_unlocked: boolean;
+  blocked_by: string[];
+  target_url: string;
+}
+
+export interface NextActionSummary {
+  business_id: string;
+  total_clearances: number;
+  ready_to_act_count: number;
+  critical_path_actions_count: number;
+  blocked_count: number;
+  under_review_count: number;
+  completed_count: number;
+  top_immediate_action?: NextActionItem | null;
+  actions: NextActionItem[];
+}
+
+/**
+ * Retrieve prioritized next statutory actions for an enterprise.
+ */
+export async function getNextClearanceActions(businessId: string): Promise<NextActionSummary> {
+  return apiFetch<NextActionSummary>(`/approvals/next-actions/${businessId}`);
+}
+
 
 
 

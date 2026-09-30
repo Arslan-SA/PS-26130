@@ -25,12 +25,14 @@ from app.schemas.approval import (
     DiscoveryResponse,
     GraphEdge,
     GraphNode,
+    NextActionSummaryResponse,
     RoadmapActivityRead,
     RoadmapMilestoneRead,
     RoadmapPlanResponse,
 )
 from app.services.approval_checklist import get_approval_checklist
 from app.services.dependency_engine import DependencyEngineService
+from app.services.next_action_engine import NextActionEngineService
 from app.services.requirement_engine import RequirementEngineService
 from app.services.roadmap_service import RoadmapService
 
@@ -348,6 +350,22 @@ async def get_clearance_roadmap(
             for m in plan.milestones
         ],
     )
+
+
+@router.get("/next-actions/{business_id}", response_model=NextActionSummaryResponse)
+async def get_next_clearance_actions(
+    business_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> NextActionSummaryResponse:
+    """
+    Compute prioritized next statutory actions for an enterprise.
+    Identifies unlocked critical path clearances, documents requiring completion,
+    active department SLA monitoring, and prerequisite bottlenecks.
+    """
+    await _verify_business_access(business_id, current_user, db)
+    return await NextActionEngineService.compute_next_actions(db, business_id)
+
 
 
 

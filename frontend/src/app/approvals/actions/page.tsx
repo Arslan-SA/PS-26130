@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Business, fetchUserBusinesses } from "@/lib/business";
-import { RoadmapPlan, getClearanceRoadmap } from "@/lib/approvals";
-import PersonalizedRoadmapView from "@/components/approvals/PersonalizedRoadmapView";
+import { NextActionSummary, getNextClearanceActions } from "@/lib/approvals";
+import { NextActionQueueView } from "@/components/approvals/NextActionQueueView";
 
-export default function ApprovalsRoadmapPage() {
+export default function NextActionsPage() {
   const [business, setBusiness] = useState<Business | null>(null);
-  const [plan, setPlan] = useState<RoadmapPlan | null>(null);
+  const [summary, setSummary] = useState<NextActionSummary | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -21,12 +21,12 @@ export default function ApprovalsRoadmapPage() {
         if (businesses && businesses.length > 0) {
           const biz = businesses[0];
           setBusiness(biz);
-          const p = await getClearanceRoadmap(biz.id);
-          setPlan(p);
+          const actions = await getNextClearanceActions(biz.id);
+          setSummary(actions);
         }
       } catch (err: any) {
-        console.error("Failed to load clearance roadmap:", err);
-        setErrorMsg(err.message || "Failed to retrieve clearance roadmap.");
+        console.error("Failed to load next statutory actions:", err);
+        setErrorMsg(err.message || "Failed to retrieve next statutory actions.");
       } finally {
         setLoading(false);
       }
@@ -42,17 +42,17 @@ export default function ApprovalsRoadmapPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-6 bg-slate-900/80 border border-slate-800 rounded-2xl shadow-xl backdrop-blur-md">
             <div>
               <div className="flex items-center gap-3">
-                <span className="p-2 rounded-lg bg-indigo-900/40 text-indigo-400 border border-indigo-700/40">
+                <span className="p-2 rounded-lg bg-emerald-900/40 text-emerald-400 border border-emerald-700/40">
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </span>
                 <div>
                   <h1 className="text-2xl font-bold text-white tracking-tight">
-                    Personalized Regulatory Timeline & Roadmap
+                    Next-Action Regulatory Queue
                   </h1>
                   <p className="text-xs text-slate-400 mt-0.5">
-                    {business ? `${business.legal_name} • Lifecycle Gantt Progression` : "Clearance Execution Timeline"}
+                    {business ? `${business.legal_name} • Dynamic Clearance Priority & Unblocking Engine` : "Prioritized Statutory Action Tasks"}
                   </p>
                 </div>
               </div>
@@ -72,15 +72,15 @@ export default function ApprovalsRoadmapPage() {
               >
                 DAG Graph
               </Link>
-              <span className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white shadow-sm">
-                Roadmap
-              </span>
               <Link
-                href="/approvals/actions"
+                href="/approvals/roadmap"
                 className="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white transition-colors"
               >
-                Next Actions
+                Roadmap
               </Link>
+              <span className="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 text-white shadow-sm">
+                Next Actions
+              </span>
             </div>
           </div>
 
@@ -94,14 +94,14 @@ export default function ApprovalsRoadmapPage() {
           {/* Content */}
           {loading ? (
             <div className="p-16 text-center text-slate-400 bg-slate-900/40 rounded-2xl border border-slate-800">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-slate-700 border-t-indigo-500 mb-4"></div>
-              <p className="text-sm">Calculating milestone phase dates and statutory forward pass...</p>
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-slate-700 border-t-emerald-500 mb-4"></div>
+              <p className="text-sm">Evaluating prerequisite DAG unlocks and critical path urgency...</p>
             </div>
-          ) : plan ? (
-            <PersonalizedRoadmapView plan={plan} />
+          ) : summary ? (
+            <NextActionQueueView summary={summary} />
           ) : (
             <div className="p-12 text-center bg-slate-900/40 rounded-2xl border border-slate-800 text-slate-400">
-              No clearance roadmap available for this business unit.
+              No clearance actions available for this business unit.
             </div>
           )}
         </div>
