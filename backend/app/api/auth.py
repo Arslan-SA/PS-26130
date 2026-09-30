@@ -7,6 +7,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings
 from app.core.database import get_db
+from app.core.dependencies import get_current_user
+from app.core.security import create_access_token, create_refresh_token
+from app.models.user import User
 from app.schemas.user import TokenResponse, UserLoginRequest, UserRegisterRequest, UserResponse
 from app.services.auth_service import authenticate_user, register_user
 
@@ -34,7 +37,7 @@ async def register(
 @router.post(
     "/login",
     response_model=TokenResponse,
-    summary="Authenticate user and obtain tokens",
+    summary="Authenticate user and obtain JWT tokens",
 )
 async def login(
     payload: UserLoginRequest,
@@ -42,12 +45,19 @@ async def login(
 ) -> TokenResponse:
     """
     Authenticate user with email and password credentials.
-    Returns access token, refresh token, and user identity profile.
+    Returns signed JWT access token, refresh token, and user identity profile.
     """
     user = await authenticate_user(db, payload.email, payload.password)
-    # Temporary token generator until Fragment 20 JWT encoder
-    access_token = f"token_{user.id}_{user.role.value}"
-    refresh_token = f"refresh_{user.id}"
+
+    token_payload = {
+        "sub": user.id,
+        "email": user.email,
+        "role": user.role.value,
+        "department_id": user.department_id,
+    }
+
+    access_token = create_access_token(data=token_payload)
+    refresh_token = create_refresh_token(data={"sub": user.id})
 
     return TokenResponse(
         access_token=access_token,
@@ -56,3 +66,15 @@ async def login(
         expires_in=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         user=UserResponse.model_validate(user),
     )
+
+
+@router.get(
+    "/me",
+    response_model=UserResponse,
+    summary="Get current authenticated user profile",
+)
+async def get_me(
+    current_user: User = Depends(get_current_user),
+) -> UserResponse:
+    """Returns the authenticated user's profile and permissions."""
+    return UserResponse.model_validate(current_user)
