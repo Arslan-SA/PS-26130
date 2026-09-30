@@ -7,8 +7,8 @@
 
 ## Progress Summary
 - **Total Fragments**: 150
-- **Completed**: 34
-- **Remaining**: 116
+- **Completed**: 35
+- **Remaining**: 115
 - **Current Phase**: Phase 3 — Business Onboarding (Fragments 29–40)
 
 ---
@@ -64,8 +64,8 @@
 | 31 | Industry onboarding | `business` | `app/schemas/business.py`, `app/services/business_service.py`, `test_business_onboarding_service.py` | `pytest test_business_onboarding_service.py` 4 passed (all 55 passed) | `4fa14d2` | ✅ Complete |
 | 32 | Business profile UI | `frontend` | `frontend/src/lib/business.ts`, `components/onboarding/OnboardingWizard.tsx`, `app/onboarding/page.tsx` | Next.js 14 static compilation (8/8 routes generated) | `2a47e5e` | ✅ Complete |
 | 33 | Industry classification | `business` | `app/services/classification_service.py`, `backend/tests/test_industry_classification.py` | `pytest test_industry_classification.py` 5 passed (all 60 passed) | `67e7e8b` | ✅ Complete |
-| 34 | Location information | `business` | `app/services/location_service.py`, `backend/tests/test_location_service.py` | `pytest test_location_service.py` 4 passed (all 64 passed) | Pending | ✅ Complete |
-| 35 | Investment information | `business` | Plant, machinery, and equipment capital tracking | Investment calculation tests | — | ⏳ Planned |
+| 34 | Location information | `business` | `app/services/location_service.py`, `backend/tests/test_location_service.py` | `pytest test_location_service.py` 4 passed (all 64 passed) | `d3d36fe` | ✅ Complete |
+| 35 | Investment information | `business` | `app/services/investment_service.py`, `backend/tests/test_investment_service.py` | `pytest test_investment_service.py` 5 passed (all 69 passed) | Pending | ✅ Complete |
 | 36 | Business dashboard | `frontend` | Enterprise single-window overview & metrics | UI component tests | — | ⏳ Planned |
 | 37 | Profile completeness | `business` | Profile completeness calculation engine | Completeness scoring tests | — | ⏳ Planned |
 | 38 | Profile validation | `business` | PAN, GSTIN, and CIN statutory format validators | Regex & algorithm tests | — | ⏳ Planned |
