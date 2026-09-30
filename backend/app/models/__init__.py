@@ -8,6 +8,7 @@ from app.models.business import Business, EntityType, MSMECategory
 from app.models.business_profile import BusinessProfile, IndustryScale, PollutionCategory
 from app.models.approval import Approval
 from app.models.approval_requirement import ApprovalRequirement, RequirementStatus, RequirementStage
+from app.models.department import Department, JurisdictionLevel
 
 __all__ = [
     "BaseModel",
@@ -25,6 +26,9 @@ __all__ = [
     "ApprovalRequirement",
     "RequirementStatus",
     "RequirementStage",
+    "Department",
+    "JurisdictionLevel",
 ]
+
 
 
