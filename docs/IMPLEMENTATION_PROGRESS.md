@@ -7,8 +7,8 @@
 
 ## Progress Summary
 - **Total Fragments**: 150
-- **Completed**: 37
-- **Remaining**: 113
+- **Completed**: 38
+- **Remaining**: 112
 - **Current Phase**: Phase 3 — Business Onboarding (Fragments 29–40)
 
 ---
@@ -67,8 +67,8 @@
 | 34 | Location information | `business` | `app/services/location_service.py`, `backend/tests/test_location_service.py` | `pytest test_location_service.py` 4 passed (all 64 passed) | `d3d36fe` | ✅ Complete |
 | 35 | Investment information | `business` | `app/services/investment_service.py`, `backend/tests/test_investment_service.py` | `pytest test_investment_service.py` 5 passed (all 69 passed) | `ed36e8a` | ✅ Complete |
 | 36 | Business dashboard | `frontend` | `frontend/src/app/dashboard/page.tsx` | Next.js 14 static compilation (9/9 routes generated) | `ab03594` | ✅ Complete |
-| 37 | Profile completeness | `business` | `app/services/completeness_service.py`, `backend/tests/test_completeness_service.py` | `pytest test_completeness_service.py` 3 passed (all 72 passed) | Pending | ✅ Complete |
-| 38 | Profile validation | `business` | PAN, GSTIN, and CIN statutory format validators | Regex & algorithm tests | — | ⏳ Planned |
+| 37 | Profile completeness | `business` | `app/services/completeness_service.py`, `backend/tests/test_completeness_service.py` | `pytest test_completeness_service.py` 3 passed (all 72 passed) | `ccd120b` | ✅ Complete |
+| 38 | Profile validation | `business` | `app/services/validation_service.py`, `backend/tests/test_statutory_validation.py` | `pytest test_statutory_validation.py` 4 passed (all 76 passed) | Pending | ✅ Complete |
 | 39 | Business profile APIs | `business` | REST endpoints for CRUD business profile operations | API integration tests | — | ⏳ Planned |
 | 40 | Onboarding testing | `business` | Full end-to-end industrial onboarding suite | Full test suite passed | — | ⏳ Planned |
 
