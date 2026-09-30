@@ -120,3 +120,46 @@ class DependencyGraphResponse(BaseModel):
     critical_path_days: int
 
 
+class RoadmapActivityRead(BaseModel):
+    """Activity entry along the statutory clearance timeline."""
+    approval_code: str
+    requirement_id: str
+    title: str
+    department_code: str
+    stage: RequirementStage
+    status: RequirementStatus
+    sla_days: int
+    estimated_fee: float
+    start_day_offset: int
+    finish_day_offset: int
+    scheduled_start: str
+    scheduled_finish: str
+    is_critical: bool
+    prerequisites: List[str]
+
+
+class RoadmapMilestoneRead(BaseModel):
+    """Milestone phase along the roadmap."""
+    phase_id: str
+    title: str
+    description: str
+    start_day: int
+    finish_day: int
+    scheduled_start: str
+    scheduled_finish: str
+    activity_count: int
+    total_estimated_fee: float
+
+
+class RoadmapPlanResponse(BaseModel):
+    """Complete personalized statutory roadmap."""
+    business_id: str
+    base_start_date: str
+    projected_commissioning_date: str
+    total_calendar_days: int
+    critical_path_days: int
+    activities: List[RoadmapActivityRead]
+    milestones: List[RoadmapMilestoneRead]
+
+
+

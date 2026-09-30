@@ -182,5 +182,52 @@ export async function getDependencyGraph(businessId: string): Promise<Dependency
   return apiFetch<DependencyGraphResponse>(`/approvals/graph/${businessId}`);
 }
 
+export interface RoadmapActivity {
+  approval_code: string;
+  requirement_id: string;
+  title: string;
+  department_code: string;
+  stage: RequirementStage;
+  status: RequirementStatus;
+  sla_days: number;
+  estimated_fee: number;
+  start_day_offset: number;
+  finish_day_offset: number;
+  scheduled_start: string;
+  scheduled_finish: string;
+  is_critical: boolean;
+  prerequisites: string[];
+}
+
+export interface RoadmapMilestone {
+  phase_id: string;
+  title: string;
+  description: string;
+  start_day: number;
+  finish_day: number;
+  scheduled_start: string;
+  scheduled_finish: string;
+  activity_count: number;
+  total_estimated_fee: number;
+}
+
+export interface RoadmapPlan {
+  business_id: string;
+  base_start_date: string;
+  projected_commissioning_date: string;
+  total_calendar_days: number;
+  critical_path_days: number;
+  activities: RoadmapActivity[];
+  milestones: RoadmapMilestone[];
+}
+
+/**
+ * Retrieve personalized statutory clearance timeline and roadmap.
+ */
+export async function getClearanceRoadmap(businessId: string): Promise<RoadmapPlan> {
+  return apiFetch<RoadmapPlan>(`/approvals/roadmap/${businessId}`);
+}
+
+
 
 

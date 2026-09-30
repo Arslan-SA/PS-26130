@@ -25,10 +25,14 @@ from app.schemas.approval import (
     DiscoveryResponse,
     GraphEdge,
     GraphNode,
+    RoadmapActivityRead,
+    RoadmapMilestoneRead,
+    RoadmapPlanResponse,
 )
 from app.services.approval_checklist import get_approval_checklist
 from app.services.dependency_engine import DependencyEngineService
 from app.services.requirement_engine import RequirementEngineService
+from app.services.roadmap_service import RoadmapService
 
 router = APIRouter(prefix="/approvals", tags=["Approvals & Clearances"])
 
@@ -293,5 +297,57 @@ async def get_approval_dependency_graph(
         critical_path=critical_path,
         critical_path_days=critical_days,
     )
+
+
+@router.get("/roadmap/{business_id}", response_model=RoadmapPlanResponse)
+async def get_clearance_roadmap(
+    business_id: str,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> RoadmapPlanResponse:
+    """Retrieve personalized statutory clearance timeline and milestone schedule."""
+    await _verify_business_access(business_id, current_user, db)
+    plan = await RoadmapService.generate_roadmap(db, business_id)
+    return RoadmapPlanResponse(
+        business_id=plan.business_id,
+        base_start_date=plan.base_start_date.isoformat(),
+        projected_commissioning_date=plan.projected_commissioning_date.isoformat(),
+        total_calendar_days=plan.total_calendar_days,
+        critical_path_days=plan.critical_path_days,
+        activities=[
+            RoadmapActivityRead(
+                approval_code=a.approval_code,
+                requirement_id=a.requirement_id,
+                title=a.title,
+                department_code=a.department_code,
+                stage=a.stage,
+                status=a.status,
+                sla_days=a.sla_days,
+                estimated_fee=a.estimated_fee,
+                start_day_offset=a.start_day_offset,
+                finish_day_offset=a.finish_day_offset,
+                scheduled_start=a.scheduled_start.isoformat(),
+                scheduled_finish=a.scheduled_finish.isoformat(),
+                is_critical=a.is_critical,
+                prerequisites=a.prerequisites,
+            )
+            for a in plan.activities
+        ],
+        milestones=[
+            RoadmapMilestoneRead(
+                phase_id=m.phase_id,
+                title=m.title,
+                description=m.description,
+                start_day=m.start_day,
+                finish_day=m.finish_day,
+                scheduled_start=m.scheduled_start.isoformat(),
+                scheduled_finish=m.scheduled_finish.isoformat(),
+                activity_count=m.activity_count,
+                total_estimated_fee=m.total_estimated_fee,
+            )
+            for m in plan.milestones
+        ],
+    )
+
 
 
