@@ -39,8 +39,8 @@
 
 | # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
 |---|---|---|---|---|---|---|
-| 16 | User model | `auth` | `app/models/user.py`, `app/models/__init__.py` | `pytest test_user_model.py` 1 passed | `pending` | 🔄 In Progress |
-| 17 | Password hashing | `auth` | Password hashing service (bcrypt/passlib) | Hashing & verify unit tests | — | ⏳ Planned |
+| 16 | User model | `auth` | `app/models/user.py`, `app/models/__init__.py` | `pytest test_user_model.py` 1 passed | `5a94cb7` | ✅ Complete |
+| 17 | Password hashing | `auth` | `app/core/security.py`, `test_password_hashing.py` | `pytest test_password_hashing.py` 3 passed | `pending` | 🔄 In Progress |
 | 18 | Registration | `auth` | Registration schema, service & `/register` endpoint | Registration flow test | — | ⏳ Planned |
 | 19 | Login | `auth` | Login schema & `/login` endpoint | Credential validation test | — | ⏳ Planned |
 | 20 | JWT authentication | `auth` | JWT token generator & Bearer dependency | Token decoding test | — | ⏳ Planned |
