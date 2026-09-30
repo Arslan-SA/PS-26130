@@ -103,6 +103,7 @@ class Business(BaseModel):
 
     # Relationships
     user = relationship("User", back_populates="businesses", lazy="selectin")
+    profile = relationship("BusinessProfile", back_populates="business", uselist=False, cascade="all, delete-orphan", lazy="selectin")
 
     def __repr__(self) -> str:
         return f"<Business id={self.id} legal_name='{self.legal_name}' pan='{self.pan}'>"
