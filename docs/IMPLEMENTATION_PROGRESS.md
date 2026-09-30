@@ -85,7 +85,9 @@
 | 47 | Approval recommendation UI | `frontend` | `frontend/src/lib/approvals.ts`, `components/approvals/ApprovalRecommendationCard.tsx`, `app/approvals/page.tsx` | Next.js 14 static build (10/10 routes compiled) | `54e1de2` | ✅ Complete |
 | 48 | Approval checklist | `approvals` | `app/services/approval_checklist.py`, `app/api/approvals.py`, `components/approvals/ApprovalChecklistView.tsx`, `test_approval_checklist.py` | `pytest test_approval_checklist.py` 3 passed (all 108 passed) | `a031710` | ✅ Complete |
 | 49 | Approval detail page | `frontend` | `frontend/src/app/approvals/[id]/page.tsx`, `frontend/src/lib/approvals.ts`, `app/api/approvals.py` | Next.js dynamic route compilation + `pytest test_approval_api.py` (all 109 passed) | `4e6ef42` | ✅ Complete |
-| 50 | Approval dependency model | `approvals` | `app/models/approval_dependency.py`, `models/__init__.py`, `test_approval_dependency_model.py` | `pytest test_approval_dependency_model.py` 3 passed (all 112 passed) | `2aa3fec` | ✅ Complete |
+| 50 | Approval dependency model | `approvals` | `app/models/approval_dependency.py`, `models/__init__.py`, `test_approval_dependency_model.py` | `pytest test_approval_dependency_model.py` 3 passed (all 112 passed) | `80f1d86` | ✅ Complete |
+| 51 | Dependency engine | `approvals` | `app/services/dependency_engine.py`, `test_dependency_engine.py` | `pytest test_dependency_engine.py` 4 passed (all 116 passed) | `5586a04` | ✅ Complete |
+
 
 
 
