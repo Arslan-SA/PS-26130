@@ -73,7 +73,13 @@
 | 40 | Onboarding testing | `business` | `backend/tests/test_onboarding_e2e.py` | `pytest test_onboarding_e2e.py` 4 passed (all 84 passed) | `37b0228` | ✅ Complete |
 
 ## Phase 4: Approval Engine (Fragments 41–58)
-*41. Approval model, 42. Approval requirement model, 43. Department model, 44. Approval rules, 45. Requirement engine, 46. Approval recommendation API, 47. Approval recommendation UI, 48. Approval checklist, 49. Approval detail page, 50. Approval dependency model, 51. Dependency engine, 52. Dependency graph backend, 53. Dependency graph frontend, 54. Personalized roadmap, 55. Next-action engine, 56. Approval status tracking, 57. Approval workflow testing, 58. Approval architecture documentation.*
+
+| # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
+|---|---|---|---|---|---|---|
+| 41 | Approval model | `approvals` | `app/models/approval.py`, `models/__init__.py`, `test_approval_model.py` | `pytest test_approval_model.py` 3 passed (all 87 passed) | `9259b2e` | ✅ Complete |
+
+*Upcoming Phase 4 fragments: 42. Approval requirement model, 43. Department model, 44. Approval rules, 45. Requirement engine, 46. Approval recommendation API, 47. Approval recommendation UI, 48. Approval checklist, 49. Approval detail page, 50. Approval dependency model, 51. Dependency engine, 52. Dependency graph backend, 53. Dependency graph frontend, 54. Personalized roadmap, 55. Next-action engine, 56. Approval status tracking, 57. Approval workflow testing, 58. Approval architecture documentation.*
+
 
 ## Phase 5: Document Intelligence (Fragments 59–75)
 *59. Document model, 60. Document storage abstraction, 61. Document upload API, 62. Secure document access, 63. Document upload UI, 64. OCR integration, 65. OCR processing pipeline, 66. Document type classification, 67. Field extraction, 68. Document validation engine, 69. Required-document matching, 70. Missing-document detection, 71. Expiry detection, 72. Business-profile mismatch detection, 73. Document health dashboard, 74. Document processing error handling, 75. Document intelligence testing.*

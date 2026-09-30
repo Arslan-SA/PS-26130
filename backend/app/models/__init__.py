@@ -6,6 +6,7 @@ from app.models.base import BaseModel, TimestampMixin, AuditMixin
 from app.models.user import User, UserRole
 from app.models.business import Business, EntityType, MSMECategory
 from app.models.business_profile import BusinessProfile, IndustryScale, PollutionCategory
+from app.models.approval import Approval
 
 __all__ = [
     "BaseModel",
@@ -19,4 +20,6 @@ __all__ = [
     "BusinessProfile",
     "IndustryScale",
     "PollutionCategory",
+    "Approval",
 ]
+
