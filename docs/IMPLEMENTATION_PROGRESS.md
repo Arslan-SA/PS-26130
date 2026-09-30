@@ -7,9 +7,9 @@
 
 ## Progress Summary
 - **Total Fragments**: 150
-- **Completed**: 28
-- **Remaining**: 122
-- **Current Phase**: Phase 2 — Authentication & RBAC (Completed)
+- **Completed**: 29
+- **Remaining**: 121
+- **Current Phase**: Phase 3 — Business Onboarding (Fragments 29–40)
 
 ---
 
@@ -53,8 +53,24 @@
 | 27 | Protected frontend routes | `frontend` | Auth context, Navbar, login/register & unauthorized pages | `npm run build` static compilation | `ec80316` | ✅ Complete |
 | 28 | Authentication testing | `auth` | `backend/tests/test_auth_e2e.py` | `pytest test_auth_e2e.py` 4 passed (all 45 tests passed) | `6df1b61` | ✅ Complete |
 
+---
+
 ## Phase 3: Business Onboarding (Fragments 29–40)
-*29. Business model, 30. Business profile model, 31. Industry onboarding, 32. Business profile UI, 33. Industry classification, 34. Location information, 35. Investment information, 36. Business dashboard, 37. Profile completeness, 38. Profile validation, 39. Business profile APIs, 40. Onboarding testing.*
+
+| # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
+|---|---|---|---|---|---|---|
+| 29 | Business model | `business` | `app/models/business.py`, `app/models/user.py`, `models/__init__.py` | `pytest test_business_model.py` 3 passed (all 48 passed) | `b492b8b` | ✅ Complete |
+| 30 | Business profile model | `business` | Business profile entity and manufacturing fields | Profile model verification | — | ⏳ Planned |
+| 31 | Industry onboarding | `business` | Onboarding orchestration and business creation service | Onboarding service tests | — | ⏳ Planned |
+| 32 | Business profile UI | `frontend` | Business profile onboarding wizard and form steps | Next.js compilation | — | ⏳ Planned |
+| 33 | Industry classification | `business` | CPCB Red/Orange/Green/White classification engine | Classification tests | — | ⏳ Planned |
+| 34 | Location information | `business` | Plot, state, district, and industrial park mapping | Location validation tests | — | ⏳ Planned |
+| 35 | Investment information | `business` | Plant, machinery, and equipment capital tracking | Investment calculation tests | — | ⏳ Planned |
+| 36 | Business dashboard | `frontend` | Enterprise single-window overview & metrics | UI component tests | — | ⏳ Planned |
+| 37 | Profile completeness | `business` | Profile completeness calculation engine | Completeness scoring tests | — | ⏳ Planned |
+| 38 | Profile validation | `business` | PAN, GSTIN, and CIN statutory format validators | Regex & algorithm tests | — | ⏳ Planned |
+| 39 | Business profile APIs | `business` | REST endpoints for CRUD business profile operations | API integration tests | — | ⏳ Planned |
+| 40 | Onboarding testing | `business` | Full end-to-end industrial onboarding suite | Full test suite passed | — | ⏳ Planned |
 
 ## Phase 4: Approval Engine (Fragments 41–58)
 *41. Approval model, 42. Approval requirement model, 43. Department model, 44. Approval rules, 45. Requirement engine, 46. Approval recommendation API, 47. Approval recommendation UI, 48. Approval checklist, 49. Approval detail page, 50. Approval dependency model, 51. Dependency engine, 52. Dependency graph backend, 53. Dependency graph frontend, 54. Personalized roadmap, 55. Next-action engine, 56. Approval status tracking, 57. Approval workflow testing, 58. Approval architecture documentation.*

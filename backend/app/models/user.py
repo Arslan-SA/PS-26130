@@ -4,7 +4,7 @@ User database model with Role-Based Access Control (RBAC) enumeration.
 
 import enum
 from sqlalchemy import Boolean, Enum, String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import BaseModel
 
@@ -60,6 +60,9 @@ class User(BaseModel):
         default=False,
         nullable=False,
     )
+
+    # Relationships
+    businesses = relationship("Business", back_populates="user", cascade="all, delete-orphan", lazy="selectin")
 
     def __repr__(self) -> str:
         return f"<User email={self.email} role={self.role}>"
