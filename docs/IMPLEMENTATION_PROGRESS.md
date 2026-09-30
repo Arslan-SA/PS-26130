@@ -31,12 +31,27 @@
 | 12 | Logging system | `core` | `app/core/logging.py`, `app/core/middleware.py` | `pytest test_logging_middleware.py` 2 passed | `f1a2d1c` | ✅ Complete |
 | 13 | Configuration management | `config` | `app/core/config.py` Pydantic BaseSettings | `pytest test_config.py` 2 passed | `cfbdd38` | ✅ Complete |
 | 14 | Health-check endpoints | `health` | `/health`, `/health/ready`, `/health/live` endpoints | `pytest test_health.py` 3 passed | `4caf051` | ✅ Complete |
-| 15 | CI/basic quality checks | `ci` | `.github/workflows/ci.yml`, `scripts/ci_check.sh` | Full suite (14 tests + Next.js build) passed | `47a11ea` | ✅ Complete |
+| 15 | CI/basic quality checks | `ci` | `.github/workflows/ci.yml`, `scripts/ci_check.sh` | Full suite (14 tests + Next.js build) passed | `7954288` | ✅ Complete |
 
 ---
 
 ## Phase 2: Authentication & RBAC (Fragments 16–28)
-*16. User model, 17. Password hashing, 18. Registration, 19. Login, 20. JWT authentication, 21. Refresh/session handling, 22. RBAC middleware, 23. Industry role, 24. Officer role, 25. Inspector role, 26. Admin role, 27. Protected frontend routes, 28. Authentication testing.*
+
+| # | Fragment | Scope | Files Changed | Verification / Tests | Commit | Status |
+|---|---|---|---|---|---|---|
+| 16 | User model | `auth` | `app/models/user.py`, `app/models/__init__.py` | `pytest test_user_model.py` 1 passed | `pending` | 🔄 In Progress |
+| 17 | Password hashing | `auth` | Password hashing service (bcrypt/passlib) | Hashing & verify unit tests | — | ⏳ Planned |
+| 18 | Registration | `auth` | Registration schema, service & `/register` endpoint | Registration flow test | — | ⏳ Planned |
+| 19 | Login | `auth` | Login schema & `/login` endpoint | Credential validation test | — | ⏳ Planned |
+| 20 | JWT authentication | `auth` | JWT token generator & Bearer dependency | Token decoding test | — | ⏳ Planned |
+| 21 | Refresh/session handling | `auth` | Refresh token generation & `/refresh` endpoint | Token rotation test | — | ⏳ Planned |
+| 22 | RBAC middleware | `auth` | Role checker dependency & permission guard | Role validation test | — | ⏳ Planned |
+| 23 | Industry role | `auth` | Industry user portal scope & profile links | Scoped access test | — | ⏳ Planned |
+| 24 | Officer role | `auth` | Officer portal scope & department isolation | Department boundary test | — | ⏳ Planned |
+| 25 | Inspector role | `auth` | Inspector portal scope & assigned site queues | Inspector access test | — | ⏳ Planned |
+| 26 | Admin role | `auth` | Admin full access scope & user management | Admin privileges test | — | ⏳ Planned |
+| 27 | Protected frontend routes | `frontend` | Auth context, middleware & login/register pages | Route protection validation | — | ⏳ Planned |
+| 28 | Authentication testing | `auth` | End-to-end multi-role auth test suite | Full test suite passed | — | ⏳ Planned |
 
 ## Phase 3: Business Onboarding (Fragments 29–40)
 *29. Business model, 30. Business profile model, 31. Industry onboarding, 32. Business profile UI, 33. Industry classification, 34. Location information, 35. Investment information, 36. Business dashboard, 37. Profile completeness, 38. Profile validation, 39. Business profile APIs, 40. Onboarding testing.*
