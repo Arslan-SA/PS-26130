@@ -49,3 +49,16 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     expires_in: int
     user: UserResponse
+
+
+class RefreshTokenRequest(BaseModel):
+    """Payload for rotating tokens using an existing refresh token."""
+    refresh_token: str = Field(..., description="Valid JWT refresh token")
+
+
+class RefreshTokenResponse(BaseModel):
+    """Rotated access and refresh tokens."""
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+    expires_in: int

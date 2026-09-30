@@ -10,8 +10,15 @@ from app.core.database import get_db
 from app.core.dependencies import get_current_user
 from app.core.security import create_access_token, create_refresh_token
 from app.models.user import User
-from app.schemas.user import TokenResponse, UserLoginRequest, UserRegisterRequest, UserResponse
-from app.services.auth_service import authenticate_user, register_user
+from app.schemas.user import (
+    RefreshTokenRequest,
+    RefreshTokenResponse,
+    TokenResponse,
+    UserLoginRequest,
+    UserRegisterRequest,
+    UserResponse,
+)
+from app.services.auth_service import authenticate_user, refresh_user_token, register_user
 
 router = APIRouter(prefix="/auth", tags=["Authentication & Access"])
 
@@ -78,3 +85,25 @@ async def get_me(
 ) -> UserResponse:
     """Returns the authenticated user's profile and permissions."""
     return UserResponse.model_validate(current_user)
+
+
+@router.post(
+    "/refresh",
+    response_model=RefreshTokenResponse,
+    summary="Rotate refresh token and obtain new access token",
+)
+async def refresh_token_endpoint(
+    payload: RefreshTokenRequest,
+    db: AsyncSession = Depends(get_db),
+) -> RefreshTokenResponse:
+    """
+    Exchanges an existing valid refresh token for a fresh access token
+    and newly rotated refresh token.
+    """
+    new_access, new_refresh, expires_in = await refresh_user_token(db, payload.refresh_token)
+    return RefreshTokenResponse(
+        access_token=new_access,
+        refresh_token=new_refresh,
+        token_type="bearer",
+        expires_in=expires_in,
+    )

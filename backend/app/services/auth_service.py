@@ -70,3 +70,38 @@ async def authenticate_user(db: AsyncSession, email: str, password: str) -> User
         raise AuthenticationError("Invalid email or password.")
 
     return user
+
+
+async def refresh_user_token(db: AsyncSession, refresh_token: str) -> tuple[str, str, int]:
+    """
+    Validate refresh token, verify user status, and issue a fresh access and rotated refresh token.
+    """
+    from app.core.security import create_access_token, create_refresh_token, decode_token
+    from app.core.config import settings
+
+    payload = decode_token(refresh_token)
+    user_id = payload.get("sub")
+    token_type = payload.get("type")
+
+    if not user_id or token_type != "refresh":
+        raise AuthenticationError("Invalid refresh token.")
+
+    stmt = select(User).where(User.id == user_id)
+    result = await db.execute(stmt)
+    user = result.scalar_one_or_none()
+
+    if not user or not user.is_active:
+        raise AuthenticationError("User is no longer active.")
+
+    token_payload = {
+        "sub": user.id,
+        "email": user.email,
+        "role": user.role.value,
+        "department_id": user.department_id,
+    }
+
+    new_access_token = create_access_token(data=token_payload)
+    new_refresh_token = create_refresh_token(data={"sub": user.id})
+    expires_in = settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60
+
+    return new_access_token, new_refresh_token, expires_in

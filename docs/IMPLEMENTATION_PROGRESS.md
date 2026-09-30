@@ -43,8 +43,8 @@
 | 17 | Password hashing | `auth` | `app/core/security.py`, `test_password_hashing.py` | `pytest test_password_hashing.py` 3 passed | `c8e4833` | ✅ Complete |
 | 18 | Registration | `auth` | `app/schemas/user.py`, `auth_service.py`, `api/auth.py` | `pytest test_registration.py` 3 passed | `b58c168` | ✅ Complete |
 | 19 | Login | `auth` | `app/schemas/user.py`, `auth_service.py`, `api/auth.py` | `pytest test_login.py` 3 passed | `04b7c4f` | ✅ Complete |
-| 20 | JWT authentication | `auth` | `app/core/security.py`, `dependencies.py`, `/auth/me` | `pytest test_jwt_auth.py` 4 passed | `pending` | 🔄 In Progress |
-| 21 | Refresh/session handling | `auth` | Refresh token generation & `/refresh` endpoint | Token rotation test | — | ⏳ Planned |
+| 20 | JWT authentication | `auth` | `app/core/security.py`, `dependencies.py`, `/auth/me` | `pytest test_jwt_auth.py` 4 passed | `03e53d0` | ✅ Complete |
+| 21 | Refresh/session handling | `auth` | `app/schemas/user.py`, `auth_service.py`, `/auth/refresh` | `pytest test_refresh_token.py` 2 passed | `pending` | 🔄 In Progress |
 | 22 | RBAC middleware | `auth` | Role checker dependency & permission guard | Role validation test | — | ⏳ Planned |
 | 23 | Industry role | `auth` | Industry user portal scope & profile links | Scoped access test | — | ⏳ Planned |
 | 24 | Officer role | `auth` | Officer portal scope & department isolation | Department boundary test | — | ⏳ Planned |
