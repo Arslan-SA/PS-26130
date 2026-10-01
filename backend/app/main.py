@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.api.admin import router as admin_router
+from app.api.applications import router as applications_router
 from app.api.approvals import router as approvals_router
 from app.api.auth import router as auth_router
 from app.api.business import router as business_router
@@ -71,6 +72,7 @@ def create_application() -> FastAPI:
     app.include_router(auth_router, prefix=settings.API_V1_STR)
     app.include_router(business_router, prefix=settings.API_V1_STR)
     app.include_router(approvals_router, prefix=settings.API_V1_STR)
+    app.include_router(applications_router, prefix=settings.API_V1_STR)
     app.include_router(documents_router, prefix=settings.API_V1_STR)
     app.include_router(document_health_router, prefix=settings.API_V1_STR)
     app.include_router(document_processing_router, prefix=settings.API_V1_STR)
