@@ -80,6 +80,16 @@ class ConflictError(AppException):
         )
 
 
+class BusinessRuleViolationError(AppException):
+    def __init__(self, message: str = "Business rule constraint violated", details: Optional[Any] = None):
+        super().__init__(
+            message=message,
+            code="BUSINESS_RULE_VIOLATION",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            details=details,
+        )
+
+
 def build_error_response(
     status_code: int,
     code: str,
