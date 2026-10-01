@@ -12,6 +12,10 @@ from app.models.department import Department, JurisdictionLevel
 from app.models.approval_dependency import ApprovalDependency, DependencyType
 from app.models.approval_status_history import ApprovalStatusHistory
 from app.models.document import Document, DocumentType, DocumentVerificationStatus
+from app.models.application import Application, ApplicationStatus
+from app.models.application_status_history import ApplicationStatusHistory
+from app.models.application_query import ApplicationQuery, QueryStatus
+from app.models.inspection import Inspection, InspectionStatus, InspectionRecommendation
 
 __all__ = [
     "BaseModel",
@@ -37,6 +41,14 @@ __all__ = [
     "Document",
     "DocumentType",
     "DocumentVerificationStatus",
+    "Application",
+    "ApplicationStatus",
+    "ApplicationStatusHistory",
+    "ApplicationQuery",
+    "QueryStatus",
+    "Inspection",
+    "InspectionStatus",
+    "InspectionRecommendation",
 ]
 
 
