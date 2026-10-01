@@ -15,6 +15,8 @@ from app.api.admin import router as admin_router
 from app.api.approvals import router as approvals_router
 from app.api.auth import router as auth_router
 from app.api.business import router as business_router
+from app.api.document_health import router as document_health_router
+from app.api.document_processing import router as document_processing_router
 from app.api.documents import router as documents_router
 from app.api.health import router as health_router
 from app.api.industry import router as industry_router
@@ -70,6 +72,8 @@ def create_application() -> FastAPI:
     app.include_router(business_router, prefix=settings.API_V1_STR)
     app.include_router(approvals_router, prefix=settings.API_V1_STR)
     app.include_router(documents_router, prefix=settings.API_V1_STR)
+    app.include_router(document_health_router, prefix=settings.API_V1_STR)
+    app.include_router(document_processing_router, prefix=settings.API_V1_STR)
     app.include_router(industry_router, prefix=settings.API_V1_STR)
     app.include_router(officer_router, prefix=settings.API_V1_STR)
     app.include_router(inspector_router, prefix=settings.API_V1_STR)
