@@ -200,7 +200,7 @@ export default function BusinessDashboardPage() {
               </div>
 
               {/* Action Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Link
                   href="/documents"
                   className="p-5 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 hover:border-slate-700 rounded-xl transition group"
@@ -225,6 +225,19 @@ export default function BusinessDashboardPage() {
                   </div>
                   <h4 className="text-sm font-bold text-white group-hover:text-emerald-400 transition">Compliance Calendar</h4>
                   <p className="text-xs text-slate-400 mt-1">Track statutory renewal deadlines, annual returns, and audit schedules.</p>
+                </Link>
+
+                <Link
+                  href="/schemes"
+                  className="p-5 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 hover:border-slate-700 rounded-xl transition group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mb-3">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h4 className="text-sm font-bold text-white group-hover:text-indigo-400 transition">Incentives & Schemes</h4>
+                  <p className="text-xs text-slate-400 mt-1">Unlock capital subsidies, interest subvention, and credit guarantee schemes.</p>
                 </Link>
               </div>
             </div>
