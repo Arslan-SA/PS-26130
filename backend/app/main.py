@@ -16,6 +16,7 @@ from app.api.applications import router as applications_router
 from app.api.approvals import router as approvals_router
 from app.api.auth import router as auth_router
 from app.api.business import router as business_router
+from app.api.compliance import router as compliance_router
 from app.api.document_health import router as document_health_router
 from app.api.document_processing import router as document_processing_router
 from app.api.documents import router as documents_router
@@ -23,6 +24,7 @@ from app.api.health import router as health_router
 from app.api.industry import router as industry_router
 from app.api.inspector import router as inspector_router
 from app.api.officer import router as officer_router
+from app.api.schemes import router as schemes_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import setup_logging
@@ -73,6 +75,8 @@ def create_application() -> FastAPI:
     app.include_router(business_router, prefix=settings.API_V1_STR)
     app.include_router(approvals_router, prefix=settings.API_V1_STR)
     app.include_router(applications_router, prefix=settings.API_V1_STR)
+    app.include_router(compliance_router, prefix=settings.API_V1_STR)
+    app.include_router(schemes_router, prefix=settings.API_V1_STR)
     app.include_router(documents_router, prefix=settings.API_V1_STR)
     app.include_router(document_health_router, prefix=settings.API_V1_STR)
     app.include_router(document_processing_router, prefix=settings.API_V1_STR)
