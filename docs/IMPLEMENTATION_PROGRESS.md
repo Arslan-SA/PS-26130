@@ -147,11 +147,43 @@
 > **Phase 6 Status: ✅ 15/15 Fragments (100%) Complete** — Statutory Clearance Application Domain Models, Multi-Department Single Window Scrutiny, Document Deficiency Requisitions, Field Inspection Scheduling & Geolocated Reporting, Statutory Determination Orders, Industry Tracking Dashboard, Officer Review Portal, and End-to-End Workflow Testing.
 
 
-## Phase 7: Compliance (Fragments 91–102)
-*91. Compliance requirement model, 92. Compliance record model, 93. Compliance rule engine, 94. Compliance dashboard, 95. Deadline calculation, 96. Renewal tracking, 97. Compliance alerts, 98. Compliance status, 99. Compliance prioritization, 100. Compliance API, 101. Compliance UI, 102. Compliance testing.*
+## Phase 7: Compliance & Monitoring (Fragments 91–102)
 
-## Phase 8: Government Schemes (Fragments 103–112)
-*103. Government scheme model, 104. Eligibility rule model, 105. Scheme database seed data, 106. Eligibility engine, 107. Scheme matching API, 108. Scheme recommendation UI, 109. Eligibility explanation, 110. Required documents for schemes, 111. Scheme application guidance, 112. Scheme matching testing.*
+| # | Fragment | Subsystem | Target Files | Verification / Test | Status | Completed |
+|---|---|---|---|---|---|---|
+| 91 | Compliance requirement model | `compliance` | `app/models/compliance_requirement.py`, `models/__init__.py` | Domain model attributes, enum frequencies, category classifications | `pending` | ✅ Complete |
+| 92 | Compliance record model | `compliance` | `app/models/compliance_record.py`, `compliance_filing.py`, `compliance_alert.py` | Record lifecycle, filing attachment, alert models | `pending` | ✅ Complete |
+| 93 | Compliance rule engine | `compliance` | `app/services/compliance_service.py:evaluate_applicable_requirements` | Industry profile applicability evaluation tests | `pending` | ✅ Complete |
+| 94 | Compliance dashboard | `frontend` | `frontend/src/app/compliance/page.tsx` | Health score gauge, category breakdown, urgent queue UI | `pending` | ✅ Complete |
+| 95 | Deadline calculation | `compliance` | `compliance_service.py:calculate_next_deadline` | Monthly, quarterly, half-yearly, annual deadline cycle tests | `pending` | ✅ Complete |
+| 96 | Renewal tracking | `compliance` | `compliance_service.py:check_and_generate_cycles` | Cycle label generation & auto roll-forward tests | `pending` | ✅ Complete |
+| 97 | Compliance alerts | `compliance` | `compliance_service.py:generate_compliance_alerts` | OVERDUE, CRITICAL, WARNING, UPCOMING alert generation | `pending` | ✅ Complete |
+| 98 | Compliance status | `compliance` | `compliance_service.py:calculate_compliance_score` | Health score calculation, status breakdown & penalty risk | `pending` | ✅ Complete |
+| 99 | Compliance prioritization | `compliance` | `compliance_service.py:get_prioritized_actions` | Urgency scoring formula (days remaining + penalty risk + status) | `pending` | ✅ Complete |
+| 100 | Compliance API | `compliance` | `app/api/compliance.py`, `app/main.py` | Full REST API: seed, list, dashboard, alerts, submit, officer review | `pending` | ✅ Complete |
+| 101 | Compliance UI | `frontend` | `frontend/src/app/compliance/page.tsx`, `frontend/src/lib/compliance.ts` | Responsive UI with status cards, action modal, alert dismiss | `pending` | ✅ Complete |
+| 102 | Compliance testing | `compliance` | `backend/tests/test_compliance_e2e.py` | 16 comprehensive E2E tests passing | `pending` | ✅ Complete |
+
+> **Phase 7 Status: ✅ 12/12 Fragments (100%) Complete** — Statutory Compliance Requirement Catalog, Compliance Record & Filing Lifecycle, Urgency Scoring & Priority Action Engine, Proactive Multi-Severity Alert Generation, Automated Cycle Roll-forward & Renewal Tracking, Comprehensive REST APIs, Full Next.js Industry Compliance Dashboard with Health Gauge, and Comprehensive 16-Test Multi-Role E2E Test Suite.
+
+
+## Phase 8: Government Schemes & Subsidies (Fragments 103–112)
+
+| # | Fragment | Subsystem | Target Files | Verification / Test | Status | Completed |
+|---|---|---|---|---|---|---|
+| 103 | Government scheme model | `schemes` | `app/models/scheme.py`, `models/__init__.py` | Domain model attributes, scheme types, administrative levels | `pending` | ✅ Complete |
+| 104 | Eligibility rule model | `schemes` | `app/models/scheme.py:SchemeEligibilityRule` | Threshold rules, investment & turnover caps, Udyam requirements | `pending` | ✅ Complete |
+| 105 | Scheme database seed data | `schemes` | `app/services/scheme_service.py:seed_government_schemes` | Central & State schemes seeded (PMEGP, CGTMSE, Mudra, PLI, ZED, etc.) | `pending` | ✅ Complete |
+| 106 | Eligibility engine | `schemes` | `app/services/scheme_service.py:evaluate_scheme_eligibility` | Composite matching engine, hard criterion filtering, match scores | `pending` | ✅ Complete |
+| 107 | Scheme matching API | `schemes` | `app/api/schemes.py`, `app/main.py` | Full REST API: catalog, evaluate, recommendations, applications | `pending` | ✅ Complete |
+| 108 | Scheme recommendation UI | `frontend` | `frontend/src/app/schemes/page.tsx`, `frontend/src/lib/schemes.ts` | Next.js compilation, KPI cards, filter tabs & search | `pending` | ✅ Complete |
+| 109 | Eligibility explanation | `frontend` | `frontend/src/app/schemes/page.tsx`, `scheme_service.py` | Criterion audit breakdown (pass/fail/warning, explanation, weights) | `pending` | ✅ Complete |
+| 110 | Required documents for schemes | `schemes` | `scheme_service.py:analyze_scheme_document_gaps` | Document Vault gap analysis & readiness progress score | `pending` | ✅ Complete |
+| 111 | Scheme application guidance | `frontend` | `frontend/src/app/schemes/page.tsx`, `scheme_service.py` | Step-by-step SOP roadmap, official portal links, milestone tracker | `pending` | ✅ Complete |
+| 112 | Scheme matching testing | `schemes` | `backend/tests/test_schemes_e2e.py` | 14 comprehensive E2E tests passing | `pending` | ✅ Complete |
+
+> **Phase 8 Status: ✅ 10/10 Fragments (100%) Complete** — Government Schemes Catalog, Parametric Eligibility Rule Engine, Central & State Seed Data (PMEGP, Mudra, CGTMSE, PLI, ZED, CLCSS, State Capital Subsidy, Green Abatement), In-depth Criterion Audit Breakdown, Document Vault Gap Analysis & Readiness Scoring, Next.js Incentives Navigator UI with Application Milestone Tracker, and Comprehensive 14-Test Multi-Role E2E Test Suite.
+
 
 ## Phase 9: AI/RAG Assistant (Fragments 113–125)
 *113. AI service abstraction, 114. LLM provider configuration, 115. AI conversation model, 116. Chat API, 117. Chat UI, 118. Knowledge document model, 119. Embedding pipeline, 120. pgvector integration, 121. RAG retrieval, 122. Grounded response generation, 123. Source references, 124. AI next-action integration, 125. AI assistant testing.*
