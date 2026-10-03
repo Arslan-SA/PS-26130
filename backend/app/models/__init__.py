@@ -16,6 +16,23 @@ from app.models.application import Application, ApplicationStatus
 from app.models.application_status_history import ApplicationStatusHistory
 from app.models.application_query import ApplicationQuery, QueryStatus
 from app.models.inspection import Inspection, InspectionStatus, InspectionRecommendation
+from app.models.compliance import (
+    ComplianceRequirement,
+    ComplianceRecord,
+    ComplianceFrequency,
+    CompliancePriority,
+    ComplianceRecordStatus,
+    ComplianceCategory,
+)
+from app.models.scheme import (
+    GovernmentScheme,
+    SchemeEligibilityRule,
+    SchemeApplication,
+    SchemeType,
+    SchemeLevel,
+    ApplicationMode,
+    SchemeApplicationStatus,
+)
 
 __all__ = [
     "BaseModel",
@@ -49,8 +66,18 @@ __all__ = [
     "Inspection",
     "InspectionStatus",
     "InspectionRecommendation",
+    "ComplianceRequirement",
+    "ComplianceRecord",
+    "ComplianceFrequency",
+    "CompliancePriority",
+    "ComplianceRecordStatus",
+    "ComplianceCategory",
+    "GovernmentScheme",
+    "SchemeEligibilityRule",
+    "SchemeApplication",
+    "SchemeType",
+    "SchemeLevel",
+    "ApplicationMode",
+    "SchemeApplicationStatus",
 ]
-
-
-
 
