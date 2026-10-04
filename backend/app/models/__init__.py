@@ -33,6 +33,18 @@ from app.models.scheme import (
     ApplicationMode,
     SchemeApplicationStatus,
 )
+from app.models.conversation import (
+    Conversation,
+    ConversationMessage,
+    ConversationStatus,
+    MessageRole as ConversationMessageRole,
+)
+from app.models.knowledge_document import (
+    KnowledgeDocument,
+    KnowledgeChunk,
+    KnowledgeCategory,
+    ProcessingStatus,
+)
 
 __all__ = [
     "BaseModel",
@@ -79,5 +91,13 @@ __all__ = [
     "SchemeLevel",
     "ApplicationMode",
     "SchemeApplicationStatus",
+    "Conversation",
+    "ConversationMessage",
+    "ConversationStatus",
+    "ConversationMessageRole",
+    "KnowledgeDocument",
+    "KnowledgeChunk",
+    "KnowledgeCategory",
+    "ProcessingStatus",
 ]
 
