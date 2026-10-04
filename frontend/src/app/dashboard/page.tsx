@@ -200,7 +200,7 @@ export default function BusinessDashboardPage() {
               </div>
 
               {/* Action Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
                 <Link
                   href="/documents"
                   className="p-5 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 hover:border-slate-700 rounded-xl transition group"
@@ -238,6 +238,19 @@ export default function BusinessDashboardPage() {
                   </div>
                   <h4 className="text-sm font-bold text-white group-hover:text-indigo-400 transition">Incentives & Schemes</h4>
                   <p className="text-xs text-slate-400 mt-1">Unlock capital subsidies, interest subvention, and credit guarantee schemes.</p>
+                </Link>
+
+                <Link
+                  href="/assistant"
+                  className="p-5 bg-gradient-to-br from-indigo-950/60 to-slate-950 border border-indigo-800/40 hover:border-indigo-600/60 rounded-xl transition group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-3">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                    </svg>
+                  </div>
+                  <h4 className="text-sm font-bold text-white group-hover:text-purple-300 transition">AI Assistant</h4>
+                  <p className="text-xs text-slate-400 mt-1">RAG-grounded regulatory guidance, clearance sequencing, and next-action advice.</p>
                 </Link>
               </div>
             </div>
