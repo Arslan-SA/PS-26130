@@ -25,6 +25,7 @@ from app.api.industry import router as industry_router
 from app.api.inspector import router as inspector_router
 from app.api.officer import router as officer_router
 from app.api.schemes import router as schemes_router
+from app.api.chat import router as chat_router
 from app.core.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import setup_logging
@@ -84,6 +85,7 @@ def create_application() -> FastAPI:
     app.include_router(officer_router, prefix=settings.API_V1_STR)
     app.include_router(inspector_router, prefix=settings.API_V1_STR)
     app.include_router(admin_router, prefix=settings.API_V1_STR)
+    app.include_router(chat_router, prefix=settings.API_V1_STR)
 
     @app.get("/", tags=["Root"])
     async def root() -> JSONResponse:
