@@ -19,6 +19,9 @@ def get_password_hash(password: str) -> str:
     return bcrypt.hashpw(pwd_bytes, salt).decode("utf-8")
 
 
+hash_password = get_password_hash
+
+
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify that a plain-text password matches a salted bcrypt hash."""
     try:
